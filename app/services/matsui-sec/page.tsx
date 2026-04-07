@@ -40,7 +40,9 @@ export default function MatsuiSecPage() {
 
             <div className="mt-8">
               <a
-                href="#"
+                href="https://www.matsui.co.jp/"
+target="_blank"
+rel="noopener noreferrer"
                 className="inline-flex rounded-xl bg-slate-950 px-6 py-3 font-medium text-white transition hover:opacity-90"
               >
                 公式サイトを見る

@@ -11,6 +11,7 @@ type ResultPageProps = {
 type ServiceResult = {
   name: string;
   slug: string;
+  officialUrl: string;
   score: number;
   reason: string;
   strengths: string[];
@@ -27,72 +28,77 @@ export default async function ResultPage({ searchParams }: ResultPageProps) {
   const monthly = params.monthly ?? "";
 
   const results: ServiceResult[] = [
-    {
-      name: "SBI証券",
-      slug: "sbi-sec",
-      score: 0,
-      reason: "",
-      strengths: [
-        "総合力が高い",
-        "クレカ積立と相性が良い",
-        "ポイント活用の選択肢が広い",
-      ],
-      caution:
-        "機能が多いため、最初は情報量が多く感じる場合があります。",
-    },
-    {
-      name: "楽天証券",
-      slug: "rakuten-sec",
-      score: 0,
-      reason: "",
-      strengths: [
-        "楽天ポイントとの相性が良い",
-        "NISA利用者が多い",
-        "初心者にも比較的なじみやすい",
-      ],
-      caution:
-        "楽天経済圏との相性で評価が分かれやすい候補です。",
-    },
-    {
-      name: "マネックス証券",
-      slug: "monex-sec",
-      score: 0,
-      reason: "",
-      strengths: [
-        "米国株の比較軸で強い",
-        "商品ラインナップを見たい人向け",
-        "中級者にも相性が良い",
-      ],
-      caution:
-        "ポイント重視だけで選ぶ場合は他候補も比較した方が自然です。",
-    },
-    {
-      name: "三菱UFJ eスマート証券",
-      slug: "musmart-sec",
-      score: 0,
-      reason: "",
-      strengths: [
-        "au PAYカード積立と相性が良い",
-        "Pontaポイント活用がしやすい",
-        "少額投資との相性が良い",
-      ],
-      caution:
-        "重視する経済圏が異なる場合は優先度が下がることがあります。",
-    },
-    {
-      name: "松井証券",
-      slug: "matsui-sec",
-      score: 0,
-      reason: "",
-      strengths: [
-        "初心者向けの印象が強い",
-        "シンプルに使いやすい",
-        "サポート重視の人と相性が良い",
-      ],
-      caution:
-        "米国株や商品数を最優先するなら他候補も見比べたいところです。",
-    },
-  ];
+  {
+    name: "SBI証券",
+    slug: "sbi-sec",
+    officialUrl: "https://www.sbisec.co.jp/",
+    score: 0,
+    reason: "",
+    strengths: [
+      "総合力が高い",
+      "クレカ積立と相性が良い",
+      "ポイント活用の選択肢が広い",
+    ],
+    caution:
+      "機能が多いため、最初は情報量が多く感じる場合があります。",
+  },
+  {
+    name: "楽天証券",
+    slug: "rakuten-sec",
+    officialUrl: "https://www.rakuten-sec.co.jp/",
+    score: 0,
+    reason: "",
+    strengths: [
+      "楽天ポイントとの相性が良い",
+      "NISA利用者が多い",
+      "初心者にも比較的なじみやすい",
+    ],
+    caution:
+      "楽天経済圏との相性で評価が分かれやすい候補です。",
+  },
+  {
+    name: "マネックス証券",
+    slug: "monex-sec",
+    officialUrl: "https://www.monex.co.jp/",
+    score: 0,
+    reason: "",
+    strengths: [
+      "米国株の比較軸で強い",
+      "商品ラインナップを見たい人向け",
+      "中級者にも相性が良い",
+    ],
+    caution:
+      "ポイント重視だけで選ぶ場合は他候補も比較した方が自然です。",
+  },
+  {
+    name: "三菱UFJ eスマート証券",
+    slug: "musmart-sec",
+    officialUrl: "https://kabu.com/",
+    score: 0,
+    reason: "",
+    strengths: [
+      "au PAYカード積立と相性が良い",
+      "Pontaポイント活用がしやすい",
+      "少額投資との相性が良い",
+    ],
+    caution:
+      "重視する経済圏が異なる場合は優先度が下がることがあります。",
+  },
+  {
+    name: "松井証券",
+    slug: "matsui-sec",
+    officialUrl: "https://www.matsui.co.jp/",
+    score: 0,
+    reason: "",
+    strengths: [
+      "初心者向けの印象が強い",
+      "シンプルに使いやすい",
+      "サポート重視の人と相性が良い",
+    ],
+    caution:
+      "米国株や商品数を最優先するなら他候補も見比べたいところです。",
+  },
+];
 
   // 投資経験
   if (experience === "beginner") {
@@ -341,12 +347,14 @@ export default async function ResultPage({ searchParams }: ResultPageProps) {
                     詳細を見る
                   </a>
 
-                  <a
-                    href="#"
-                    className="rounded-xl border border-slate-300 bg-white px-6 py-3 text-center font-medium text-slate-700 transition hover:bg-slate-100"
-                  >
-                    公式サイトを見る
-                  </a>
+<a
+  href={item.officialUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="rounded-xl border border-slate-300 bg-white px-6 py-3 text-center font-medium text-slate-700 transition hover:bg-slate-100"
+>
+  公式サイトを見る
+</a>
                 </div>
               </section>
             ))}
