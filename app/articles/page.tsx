@@ -7,8 +7,16 @@ export default function ArticlesPage() {
       href: "/articles/sbi-vs-rakuten",
       tag: "比較記事",
     },
+    {
+      title: "NISA初心者に向いている証券口座の選び方",
+      description:
+        "初心者が見落としやすいポイントを整理しながら、証券口座選びの考え方をまとめた記事です。",
+      href: "/articles/nisa-beginner-choice",
+      tag: "選び方ガイド",
+    },
   ];
 
+  
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 backdrop-blur">
