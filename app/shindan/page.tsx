@@ -138,6 +138,34 @@ export default function ShindanIndexPage() {
           </div>
         </div>
       </section>
+      
+    <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20">
+    <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
+        <p className="mb-2 text-sm font-semibold text-blue-700">比較記事もあります</p>
+        <h2 className="mb-4 text-2xl font-bold text-slate-950">
+        診断の前に記事から整理したい人へ
+        </h2>
+        <p className="mb-6 text-sm leading-7 text-slate-600 sm:text-base">
+        まずは記事で違いをざっくり理解してから診断に進みたい人向けに、
+        比較記事も用意しています。
+        </p>
+
+        <div className="flex flex-col gap-3 sm:flex-row">
+        <a
+            href="/articles"
+            className="rounded-xl bg-slate-950 px-6 py-3 text-center font-medium text-white transition hover:opacity-90"
+        >
+            記事一覧を見る
+        </a>
+        <a
+            href="/articles/sbi-vs-rakuten"
+            className="rounded-xl border border-slate-300 bg-white px-6 py-3 text-center font-medium text-slate-700 transition hover:bg-slate-100"
+        >
+            SBI証券と楽天証券の比較記事を見る
+        </a>
+        </div>
+    </div>
+    </section>
 
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">

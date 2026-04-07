@@ -69,10 +69,12 @@ export default function Home() {
               NISA向け証券口座診断
             </p>
           </a>
-
           <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
             <a href="/shindan" className="transition hover:text-slate-900">
               診断一覧
+            </a>
+            <a href="/articles" className="transition hover:text-slate-900">
+              記事一覧
             </a>
             <a href="/how-it-works" className="transition hover:text-slate-900">
               使い方
@@ -270,7 +272,60 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
+      <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 sm:pb-20">
+        <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
+          <div className="mb-6 flex flex-col gap-2">
+            <p className="text-sm font-semibold text-blue-700">比較記事</p>
+            <h2 className="text-2xl font-bold text-slate-950">
+              記事から違いを整理する
+            </h2>
+            <p className="text-sm leading-7 text-slate-600 sm:text-base">
+              診断だけでなく、証券口座の違いや選び方を整理した記事も読めます。
+              比較記事を読んでから診断に進むと、より判断しやすくなります。
+            </p>
+          </div>
 
+          <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <p className="mb-2 text-sm font-semibold text-blue-700">公開中の記事</p>
+              <h3 className="mb-2 text-xl font-bold text-slate-950">
+                SBI証券と楽天証券の違いは？
+              </h3>
+              <p className="mb-5 text-sm leading-6 text-slate-600">
+                NISAを始めるときに迷いやすい2社の違いを、シンプルに整理した比較記事です。
+              </p>
+
+              <a
+                href="/articles/sbi-vs-rakuten"
+                className="inline-flex rounded-xl bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
+              >
+                記事を読む
+              </a>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-5">
+              <p className="mb-2 text-sm font-semibold text-slate-950">
+                まず見たいページ
+              </p>
+              <div className="space-y-3">
+                <a
+                  href="/articles"
+                  className="block rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+                >
+                  記事一覧を見る
+                </a>
+                <a
+                  href="/shindan"
+                  className="block rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+                >
+                  診断一覧を見る
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 sm:pb-20">
         <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
           <div className="mb-6 flex flex-col gap-2">

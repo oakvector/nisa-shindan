@@ -9,17 +9,20 @@ export default function AboutPage() {
             </p>
           </a>
 
-          <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
-            <a href="/shindan" className="transition hover:text-slate-900">
-              診断する
-            </a>
-            <a href="/how-it-works" className="transition hover:text-slate-900">
-              使い方
-            </a>
-            <a href="/about" className="transition hover:text-slate-900">
-              About
-            </a>
-          </nav>
+        <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
+        <a href="/shindan" className="transition hover:text-slate-900">
+            診断一覧
+        </a>
+        <a href="/articles" className="transition hover:text-slate-900">
+            記事一覧
+        </a>
+        <a href="/how-it-works" className="transition hover:text-slate-900">
+            使い方
+        </a>
+        <a href="/about" className="transition hover:text-slate-900">
+            About
+        </a>
+        </nav>
         </div>
       </header>
 
