@@ -14,6 +14,13 @@ export default function ArticlesPage() {
       href: "/articles/nisa-beginner-choice",
       tag: "選び方ガイド",
     },
+    {
+      title: "クレカ積立を重視する人の証券口座比較",
+      description:
+        "クレカ積立やポイント還元を重視する人向けに、証券口座の見方を整理した比較記事です。",
+      href: "/articles/credit-card-tsumitate",
+      tag: "比較記事",
+    },
   ];
 
   
