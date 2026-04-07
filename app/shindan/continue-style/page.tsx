@@ -6,27 +6,28 @@ import { useRouter } from "next/navigation";
 export default function ContinueStyleShindanPage() {
   const router = useRouter();
 
-  const [pace, setPace] = useState("");
-  const [motivation, setMotivation] = useState("");
-  const [management, setManagement] = useState("");
-  const [stress, setStress] = useState("");
-  const [idealState, setIdealState] = useState("");
+  const [idealPace, setIdealPace] = useState("");
+  const [feelGood, setFeelGood] = useState("");
+  const [manageFeeling, setManageFeeling] = useState("");
+  const [stopReason, setStopReason] = useState("");
+  const [idealAfterYear, setIdealAfterYear] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const params = new URLSearchParams({
-      pace,
-      motivation,
-      management,
-      stress,
-      idealState,
+      idealPace,
+      feelGood,
+      manageFeeling,
+      stopReason,
+      idealAfterYear,
     });
 
     router.push(`/shindan/continue-style/result?${params.toString()}`);
   };
 
-  const allAnswered = pace && motivation && management && stress && idealState;
+  const allAnswered =
+    idealPace && feelGood && manageFeeling && stopReason && idealAfterYear;
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
@@ -66,8 +67,9 @@ export default function ContinueStyleShindanPage() {
             </h1>
 
             <p className="mb-6 text-base leading-8 text-slate-600 sm:text-lg">
-              5つの質問から、あなたが無理なく続けやすい投資スタイルを整理し、
-              相性の良い証券口座候補を見つけやすくする診断です。
+              5つの質問から、あなたが無理なく続けやすい投資スタイルを整理します。
+              「手間を増やしたくない」「少しお得だと続きやすい」などの感覚から、
+              相性の良い候補を見つけやすくする診断です。
             </p>
 
             <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
@@ -84,7 +86,7 @@ export default function ContinueStyleShindanPage() {
                 {[
                   "無理のない継続",
                   "管理のしやすさ",
-                  "還元の感じやすさ",
+                  "お得さの感じやすさ",
                   "ストレスの少なさ",
                   "習慣化しやすさ",
                 ].map((item) => (
@@ -103,9 +105,9 @@ export default function ContinueStyleShindanPage() {
                 結果でわかること
               </p>
               <ol className="space-y-3 text-sm text-slate-600">
-                <li>1. あなたが続けやすい投資スタイル</li>
+                <li>1. あなたが続けやすい投資の形</li>
                 <li>2. 相性の良い証券口座候補</li>
-                <li>3. 継続しやすさの観点で重視したいポイント</li>
+                <li>3. 続けやすさの観点で重視したいポイント</li>
               </ol>
             </div>
           </div>
@@ -115,7 +117,7 @@ export default function ContinueStyleShindanPage() {
               <div>
                 <p className="text-sm font-semibold text-blue-700">質問に回答</p>
                 <h2 className="mt-1 text-2xl font-bold text-slate-950">
-                  続けやすさに近いものを選んでください
+                  いちばん近いものを選んでください
                 </h2>
               </div>
               <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
@@ -124,158 +126,158 @@ export default function ContinueStyleShindanPage() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
-              <QuestionCard title="質問1: 積立を続けるなら、どんなペースが理想ですか？">
+              <QuestionCard title="質問1: 積立を続けるなら、どんな感じが理想ですか？">
                 <RadioOption
-                  name="pace"
-                  value="simple"
-                  checked={pace === "simple"}
-                  onChange={setPace}
-                  label="できるだけ手間なく淡々と続けたい"
+                  name="idealPace"
+                  value="easy"
+                  checked={idealPace === "easy"}
+                  onChange={setIdealPace}
+                  label="あまり手間をかけずに淡々と続けたい"
                 />
                 <RadioOption
-                  name="pace"
+                  name="idealPace"
                   value="reward"
-                  checked={pace === "reward"}
-                  onChange={setPace}
-                  label="還元やメリットを感じながら続けたい"
+                  checked={idealPace === "reward"}
+                  onChange={setIdealPace}
+                  label="ちょっと得している感じがあると続けやすい"
                 />
                 <RadioOption
-                  name="pace"
-                  value="balanced"
-                  checked={pace === "balanced"}
-                  onChange={setPace}
-                  label="無理なくバランスよく続けたい"
+                  name="idealPace"
+                  value="stable"
+                  checked={idealPace === "stable"}
+                  onChange={setIdealPace}
+                  label="無理のないバランスで続けたい"
                 />
                 <RadioOption
-                  name="pace"
-                  value="flexible"
-                  checked={pace === "flexible"}
-                  onChange={setPace}
-                  label="将来の選択肢も持ちながら続けたい"
+                  name="idealPace"
+                  value="expand"
+                  checked={idealPace === "expand"}
+                  onChange={setIdealPace}
+                  label="慣れたらいろいろ広げられる形がいい"
                 />
               </QuestionCard>
 
-              <QuestionCard title="質問2: 続けるうえで、いちばん気分が上がるのは？">
+              <QuestionCard title="質問2: 続けるうえで、気分が上がるのはどれですか？">
                 <RadioOption
-                  name="motivation"
-                  value="easy"
-                  checked={motivation === "easy"}
-                  onChange={setMotivation}
+                  name="feelGood"
+                  value="easy_ui"
+                  checked={feelGood === "easy_ui"}
+                  onChange={setFeelGood}
                   label="操作がわかりやすいこと"
                 />
                 <RadioOption
-                  name="motivation"
+                  name="feelGood"
                   value="points"
-                  checked={motivation === "points"}
-                  onChange={setMotivation}
+                  checked={feelGood === "points"}
+                  onChange={setFeelGood}
                   label="ポイントや還元があること"
                 />
                 <RadioOption
-                  name="motivation"
-                  value="stable"
-                  checked={motivation === "stable"}
-                  onChange={setMotivation}
-                  label="無難で安心感があること"
+                  name="feelGood"
+                  value="安心"
+                  checked={feelGood === "安心"}
+                  onChange={setFeelGood}
+                  label="安心感があること"
                 />
                 <RadioOption
-                  name="motivation"
+                  name="feelGood"
                   value="options"
-                  checked={motivation === "options"}
-                  onChange={setMotivation}
-                  label="選択肢が広いこと"
+                  checked={feelGood === "options"}
+                  onChange={setFeelGood}
+                  label="選べる商品が多いこと"
                 />
               </QuestionCard>
 
-              <QuestionCard title="質問3: 管理や設定についてどう考えますか？">
+              <QuestionCard title="質問3: 設定や管理の手間についてはどう思いますか？">
                 <RadioOption
-                  name="management"
-                  value="minimal"
-                  checked={management === "minimal"}
-                  onChange={setManagement}
+                  name="manageFeeling"
+                  value="few"
+                  checked={manageFeeling === "few"}
+                  onChange={setManageFeeling}
                   label="できるだけ少ない方がいい"
                 />
                 <RadioOption
-                  name="management"
+                  name="manageFeeling"
                   value="worth"
-                  checked={management === "worth"}
-                  onChange={setManagement}
-                  label="メリットがあるなら多少は問題ない"
+                  checked={manageFeeling === "worth"}
+                  onChange={setManageFeeling}
+                  label="得なら多少の手間は気にしない"
                 />
                 <RadioOption
-                  name="management"
+                  name="manageFeeling"
                   value="normal"
-                  checked={management === "normal"}
-                  onChange={setManagement}
-                  label="普通"
+                  checked={manageFeeling === "normal"}
+                  onChange={setManageFeeling}
+                  label="普通くらいなら大丈夫"
                 />
                 <RadioOption
-                  name="management"
+                  name="manageFeeling"
                   value="many"
-                  checked={management === "many"}
-                  onChange={setManagement}
-                  label="多くてもあまり気にならない"
+                  checked={manageFeeling === "many"}
+                  onChange={setManageFeeling}
+                  label="多くてもあまり気にしない"
                 />
               </QuestionCard>
 
-              <QuestionCard title="質問4: 続かなくなるとしたら、何が原因になりそうですか？">
+              <QuestionCard title="質問4: もし続かなくなるとしたら、理由はどれが近いですか？">
                 <RadioOption
-                  name="stress"
+                  name="stopReason"
                   value="complex"
-                  checked={stress === "complex"}
-                  onChange={setStress}
-                  label="複雑でわかりにくいこと"
+                  checked={stopReason === "complex"}
+                  onChange={setStopReason}
+                  label="むずかしくて面倒に感じる"
                 />
                 <RadioOption
-                  name="stress"
+                  name="stopReason"
                   value="no_benefit"
-                  checked={stress === "no_benefit"}
-                  onChange={setStress}
-                  label="お得さを感じにくいこと"
+                  checked={stopReason === "no_benefit"}
+                  onChange={setStopReason}
+                  label="お得さを感じられなくなる"
                 />
                 <RadioOption
-                  name="stress"
-                  value="unclear"
-                  checked={stress === "unclear"}
-                  onChange={setStress}
-                  label="何を基準に見ればいいかわからないこと"
+                  name="stopReason"
+                  value="not_fit"
+                  checked={stopReason === "not_fit"}
+                  onChange={setStopReason}
+                  label="自分に合っているかわからなくなる"
                 />
                 <RadioOption
-                  name="stress"
-                  value="limited"
-                  checked={stress === "limited"}
-                  onChange={setStress}
-                  label="あとで選択肢が足りなくなること"
+                  name="stopReason"
+                  value="not_enough"
+                  checked={stopReason === "not_enough"}
+                  onChange={setStopReason}
+                  label="やれることが少なくて物足りなくなる"
                 />
               </QuestionCard>
 
-              <QuestionCard title="質問5: 1年後の理想に近いのはどれですか？">
+              <QuestionCard title="質問5: 1年後に理想なのはどれですか？">
                 <RadioOption
-                  name="idealState"
-                  value="keep_easy"
-                  checked={idealState === "keep_easy"}
-                  onChange={setIdealState}
-                  label="無理なく自然に積立が続いている"
+                  name="idealAfterYear"
+                  value="natural"
+                  checked={idealAfterYear === "natural"}
+                  onChange={setIdealAfterYear}
+                  label="何も無理せず自然に積立が続いている"
                 />
                 <RadioOption
-                  name="idealState"
-                  value="keep_reward"
-                  checked={idealState === "keep_reward"}
-                  onChange={setIdealState}
-                  label="還元やメリットを感じながら続けられている"
+                  name="idealAfterYear"
+                  value="reward_keep"
+                  checked={idealAfterYear === "reward_keep"}
+                  onChange={setIdealAfterYear}
+                  label="還元をうまく使いながら続けられている"
                 />
                 <RadioOption
-                  name="idealState"
-                  value="keep_safe"
-                  checked={idealState === "keep_safe"}
-                  onChange={setIdealState}
-                  label="無難で安心感のある選び方ができている"
+                  name="idealAfterYear"
+                  value="calm"
+                  checked={idealAfterYear === "calm"}
+                  onChange={setIdealAfterYear}
+                  label="不安なく落ち着いて続けられている"
                 />
                 <RadioOption
-                  name="idealState"
-                  value="keep_expand"
-                  checked={idealState === "keep_expand"}
-                  onChange={setIdealState}
-                  label="積立の先の選択肢も見えている"
+                  name="idealAfterYear"
+                  value="expand_keep"
+                  checked={idealAfterYear === "expand_keep"}
+                  onChange={setIdealAfterYear}
+                  label="積立以外も少し見えるようになっている"
                 />
               </QuestionCard>
 
@@ -284,7 +286,7 @@ export default function ContinueStyleShindanPage() {
                   回答状況
                 </p>
                 <p className="text-sm text-slate-600">
-                  {[pace, motivation, management, stress, idealState].filter(Boolean).length}
+                  {[idealPace, feelGood, manageFeeling, stopReason, idealAfterYear].filter(Boolean).length}
                   /5 問入力済み
                 </p>
               </div>

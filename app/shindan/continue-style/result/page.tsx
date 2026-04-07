@@ -1,10 +1,10 @@
 type ResultPageProps = {
   searchParams: Promise<{
-    pace?: string;
-    motivation?: string;
-    management?: string;
-    stress?: string;
-    idealState?: string;
+    idealPace?: string;
+    feelGood?: string;
+    manageFeeling?: string;
+    stopReason?: string;
+    idealAfterYear?: string;
   }>;
 };
 
@@ -19,11 +19,11 @@ type BrokerResult = {
 };
 
 type ContinueStyleKey =
-  | "easy_keep"
+  | "natural_keep"
   | "reward_keep"
   | "steady_keep"
-  | "flex_keep"
-  | "simple_keep";
+  | "expand_keep"
+  | "light_keep";
 
 type ContinueStyleInfo = {
   title: string;
@@ -32,34 +32,34 @@ type ContinueStyleInfo = {
 };
 
 const styleMaster: Record<ContinueStyleKey, ContinueStyleInfo> = {
-  easy_keep: {
+  natural_keep: {
     title: "自然体継続型",
     description:
-      "気合いで頑張るより、無理なく自然に続けたいタイプです。操作のわかりやすさや、迷いにくさと相性が良い傾向があります。",
+      "気合いで頑張るより、無理なく自然に続けたいタイプです。わかりやすさや、迷いにくさと相性が良い候補を選びやすい傾向があります。",
     points: ["わかりやすさ", "始めやすさ", "少額積立", "迷いにくさ"],
   },
   reward_keep: {
     title: "還元実感型",
     description:
-      "続けるなら、還元やお得さを感じながら続けたいタイプです。クレカ積立やポイント活用との相性を重視しやすい傾向があります。",
+      "続けるなら、少しでもお得さを感じたいタイプです。ポイント還元やクレカ積立との相性を重視しやすい傾向があります。",
     points: ["ポイント還元", "クレカ積立", "経済圏との相性", "続ける実感"],
   },
   steady_keep: {
     title: "安定継続型",
     description:
-      "極端な強みより、無難さや安心感を重視して続けたいタイプです。バランスのよい候補を選ぶと続けやすい傾向があります。",
+      "派手さより、安心感や無難さを大事にして続けたいタイプです。総合力や落ち着いて使えることを重視しやすい傾向があります。",
     points: ["総合力", "安心感", "使いやすさ", "継続しやすさ"],
   },
-  flex_keep: {
-    title: "拡張継続型",
+  expand_keep: {
+    title: "将来ひろがる型",
     description:
-      "今は積立中心でも、将来の選択肢を残しながら続けたいタイプです。商品ラインナップや拡張性との相性を見やすい傾向があります。",
-    points: ["拡張性", "商品ラインナップ", "米国株対応", "将来の自由度"],
+      "今は積立中心でも、その先の選択肢も持っていたいタイプです。商品ラインナップや将来の広がりと相性が良い候補を見やすい傾向があります。",
+    points: ["商品ラインナップ", "拡張性", "米国株対応", "将来の自由度"],
   },
-  simple_keep: {
+  light_keep: {
     title: "省力継続型",
     description:
-      "設定や管理に手間をかけすぎず、できるだけ負担なく続けたいタイプです。シンプルさや管理のしやすさと相性が良い傾向があります。",
+      "設定や管理の負担を増やしすぎず、軽い感覚で続けたいタイプです。シンプルさや管理のしやすさと相性が良い候補を選びやすい傾向があります。",
     points: ["シンプルさ", "管理のしやすさ", "少額積立", "負担の少なさ"],
   },
 };
@@ -69,18 +69,18 @@ export default async function ContinueStyleResultPage({
 }: ResultPageProps) {
   const params = await searchParams;
 
-  const pace = params.pace ?? "";
-  const motivation = params.motivation ?? "";
-  const management = params.management ?? "";
-  const stress = params.stress ?? "";
-  const idealState = params.idealState ?? "";
+  const idealPace = params.idealPace ?? "";
+  const feelGood = params.feelGood ?? "";
+  const manageFeeling = params.manageFeeling ?? "";
+  const stopReason = params.stopReason ?? "";
+  const idealAfterYear = params.idealAfterYear ?? "";
 
   const styleScores: Record<ContinueStyleKey, number> = {
-    easy_keep: 0,
+    natural_keep: 0,
     reward_keep: 0,
     steady_keep: 0,
-    flex_keep: 0,
-    simple_keep: 0,
+    expand_keep: 0,
+    light_keep: 0,
   };
 
   const brokers: BrokerResult[] = [
@@ -145,124 +145,152 @@ export default async function ContinueStyleResultPage({
     if (broker) broker.score += score;
   };
 
-  if (pace === "simple") {
-    addStyle("simple_keep", 2);
-    addStyle("easy_keep", 1);
+  if (idealPace === "easy") {
+    addStyle("natural_keep", 2);
+    addStyle("light_keep", 1);
     addBroker("松井証券", 2);
     addBroker("楽天証券", 1);
+    addBroker("三菱UFJ eスマート証券", 1);
   }
-  if (pace === "reward") {
+  if (idealPace === "reward") {
     addStyle("reward_keep", 3);
     addBroker("SBI証券", 2);
     addBroker("楽天証券", 2);
-    addBroker("三菱UFJ eスマート証券", 1);
+    addBroker("三菱UFJ eスマート証券", 2);
   }
-  if (pace === "balanced") {
+  if (idealPace === "stable") {
     addStyle("steady_keep", 3);
     addBroker("SBI証券", 2);
     addBroker("楽天証券", 1);
     addBroker("松井証券", 1);
   }
-  if (pace === "flexible") {
-    addStyle("flex_keep", 3);
+  if (idealPace === "expand") {
+    addStyle("expand_keep", 3);
+    addBroker("マネックス証券", 3);
     addBroker("SBI証券", 2);
-    addBroker("マネックス証券", 2);
   }
 
-  if (motivation === "easy") {
-    addStyle("easy_keep", 2);
+  if (feelGood === "easy_ui") {
+    addStyle("natural_keep", 2);
     addBroker("松井証券", 2);
     addBroker("楽天証券", 1);
   }
-  if (motivation === "points") {
+  if (feelGood === "points") {
     addStyle("reward_keep", 2);
     addBroker("SBI証券", 2);
     addBroker("楽天証券", 2);
-    addBroker("三菱UFJ eスマート証券", 1);
+    addBroker("三菱UFJ eスマート証券", 2);
   }
-  if (motivation === "stable") {
+  if (feelGood === "安心") {
     addStyle("steady_keep", 2);
     addBroker("SBI証券", 2);
+    addBroker("松井証券", 1);
     addBroker("楽天証券", 1);
   }
-  if (motivation === "options") {
-    addStyle("flex_keep", 2);
+  if (feelGood === "options") {
+    addStyle("expand_keep", 2);
     addBroker("マネックス証券", 2);
     addBroker("SBI証券", 1);
   }
 
-  if (management === "minimal") {
-    addStyle("simple_keep", 3);
+  if (manageFeeling === "few") {
+    addStyle("light_keep", 3);
     addBroker("松井証券", 2);
     addBroker("楽天証券", 1);
   }
-  if (management === "worth") {
+  if (manageFeeling === "worth") {
     addStyle("reward_keep", 1);
     addStyle("steady_keep", 1);
     addBroker("SBI証券", 1);
     addBroker("楽天証券", 1);
+    addBroker("三菱UFJ eスマート証券", 1);
   }
-  if (management === "normal") {
+  if (manageFeeling === "normal") {
     addStyle("steady_keep", 2);
     addBroker("SBI証券", 1);
     addBroker("楽天証券", 1);
     addBroker("松井証券", 1);
   }
-  if (management === "many") {
-    addStyle("flex_keep", 2);
+  if (manageFeeling === "many") {
+    addStyle("expand_keep", 2);
     addBroker("マネックス証券", 2);
     addBroker("SBI証券", 1);
   }
 
-  if (stress === "complex") {
-    addStyle("easy_keep", 2);
-    addStyle("simple_keep", 1);
+  if (stopReason === "complex") {
+    addStyle("natural_keep", 2);
+    addStyle("light_keep", 1);
     addBroker("松井証券", 2);
     addBroker("楽天証券", 1);
   }
-  if (stress === "no_benefit") {
-    addStyle("reward_keep", 2);
-    addBroker("SBI証券", 2);
-    addBroker("楽天証券", 2);
-  }
-  if (stress === "unclear") {
-    addStyle("steady_keep", 2);
-    addBroker("SBI証券", 2);
-    addBroker("松井証券", 1);
-  }
-  if (stress === "limited") {
-    addStyle("flex_keep", 2);
-    addBroker("マネックス証券", 2);
-    addBroker("SBI証券", 1);
-  }
-
-  if (idealState === "keep_easy") {
-    addStyle("easy_keep", 2);
-    addStyle("simple_keep", 1);
-    addBroker("松井証券", 2);
-    addBroker("楽天証券", 1);
-  }
-  if (idealState === "keep_reward") {
+  if (stopReason === "no_benefit") {
     addStyle("reward_keep", 2);
     addBroker("SBI証券", 2);
     addBroker("楽天証券", 2);
     addBroker("三菱UFJ eスマート証券", 1);
   }
-  if (idealState === "keep_safe") {
+  if (stopReason === "not_fit") {
+    addStyle("steady_keep", 2);
+    addBroker("SBI証券", 2);
+    addBroker("松井証券", 1);
+  }
+  if (stopReason === "not_enough") {
+    addStyle("expand_keep", 2);
+    addBroker("マネックス証券", 2);
+    addBroker("SBI証券", 1);
+  }
+
+  if (idealAfterYear === "natural") {
+    addStyle("natural_keep", 2);
+    addStyle("light_keep", 1);
+    addBroker("松井証券", 2);
+    addBroker("楽天証券", 1);
+  }
+  if (idealAfterYear === "reward_keep") {
+    addStyle("reward_keep", 2);
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 2);
+    addBroker("三菱UFJ eスマート証券", 2);
+  }
+  if (idealAfterYear === "calm") {
     addStyle("steady_keep", 2);
     addBroker("SBI証券", 2);
     addBroker("楽天証券", 1);
     addBroker("松井証券", 1);
   }
-  if (idealState === "keep_expand") {
-    addStyle("flex_keep", 2);
-    addBroker("マネックス証券", 2);
+  if (idealAfterYear === "expand_keep") {
+    addStyle("expand_keep", 2);
+    addBroker("マネックス証券", 3);
     addBroker("SBI証券", 2);
   }
 
   const dominantStyle = (Object.entries(styleScores).sort(
     (a, b) => b[1] - a[1]
   )[0]?.[0] ?? "steady_keep") as ContinueStyleKey;
+
+  if (dominantStyle === "natural_keep") {
+    addBroker("松井証券", 2);
+    addBroker("楽天証券", 1);
+  }
+  if (dominantStyle === "reward_keep") {
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 2);
+    addBroker("三菱UFJ eスマート証券", 2);
+  }
+  if (dominantStyle === "steady_keep") {
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 1);
+    addBroker("松井証券", 1);
+  }
+  if (dominantStyle === "expand_keep") {
+    addBroker("マネックス証券", 3);
+    addBroker("SBI証券", 2);
+  }
+  if (dominantStyle === "light_keep") {
+    addBroker("松井証券", 2);
+    addBroker("三菱UFJ eスマート証券", 1);
+    addBroker("楽天証券", 1);
+  }
 
   const styleInfo = styleMaster[dominantStyle];
 
@@ -273,30 +301,30 @@ export default async function ContinueStyleResultPage({
     }
     if (item.name === "楽天証券") {
       item.reason =
-        "ポイント活用や始めやすさを感じながら無理なく続けたい人向けの候補です。";
+        "始めやすさとポイント活用の両方を感じながら、無理なく続けたい人向けの候補です。";
     }
     if (item.name === "マネックス証券") {
       item.reason =
-        "積立の先の選択肢まで視野に入れて、拡張性を持って続けたい人向けの候補です。";
+        "積立の先の選択肢まで視野に入れて、将来の広がりを持って続けたい人向けの候補です。";
     }
     if (item.name === "三菱UFJ eスマート証券") {
       item.reason =
-        "条件が合えば、少額積立や経済圏の活用で続けやすさを感じやすい候補です。";
+        "条件が合えば、少額から始めつつお得さも感じながら続けやすい候補です。";
     }
     if (item.name === "松井証券") {
       item.reason =
-        "できるだけシンプルに、管理の負担を増やしすぎず続けたい人向けの候補です。";
+        "シンプルさやわかりやすさを重視して、気負わず続けたい人向けの候補です。";
     }
   });
 
   const sortedResults = [...brokers].sort((a, b) => b.score - a.score).slice(0, 3);
 
   const answerSummary = [
-    { label: "理想のペース", value: mapPace(pace) },
-    { label: "気分が上がること", value: mapMotivation(motivation) },
-    { label: "管理や設定の考え方", value: mapManagement(management) },
-    { label: "続かなくなる原因", value: mapStress(stress) },
-    { label: "1年後の理想", value: mapIdealState(idealState) },
+    { label: "理想の続け方", value: mapIdealPace(idealPace) },
+    { label: "気分が上がること", value: mapFeelGood(feelGood) },
+    { label: "管理や設定の考え方", value: mapManageFeeling(manageFeeling) },
+    { label: "続かなくなる理由", value: mapStopReason(stopReason) },
+    { label: "1年後の理想", value: mapIdealAfterYear(idealAfterYear) },
   ];
 
   return (
@@ -513,42 +541,42 @@ export default async function ContinueStyleResultPage({
   );
 }
 
-function mapPace(value: string) {
-  if (value === "simple") return "できるだけ手間なく淡々と続けたい";
-  if (value === "reward") return "還元やメリットを感じながら続けたい";
-  if (value === "balanced") return "無理なくバランスよく続けたい";
-  if (value === "flexible") return "将来の選択肢も持ちながら続けたい";
+function mapIdealPace(value: string) {
+  if (value === "easy") return "あまり手間をかけずに淡々と続けたい";
+  if (value === "reward") return "ちょっと得している感じがあると続けやすい";
+  if (value === "stable") return "無理のないバランスで続けたい";
+  if (value === "expand") return "慣れたらいろいろ広げられる形がいい";
   return "未選択";
 }
 
-function mapMotivation(value: string) {
-  if (value === "easy") return "操作がわかりやすいこと";
+function mapFeelGood(value: string) {
+  if (value === "easy_ui") return "操作がわかりやすいこと";
   if (value === "points") return "ポイントや還元があること";
-  if (value === "stable") return "無難で安心感があること";
-  if (value === "options") return "選択肢が広いこと";
+  if (value === "安心") return "安心感があること";
+  if (value === "options") return "選べる商品が多いこと";
   return "未選択";
 }
 
-function mapManagement(value: string) {
-  if (value === "minimal") return "できるだけ少ない方がいい";
-  if (value === "worth") return "メリットがあるなら多少は問題ない";
-  if (value === "normal") return "普通";
-  if (value === "many") return "多くてもあまり気にならない";
+function mapManageFeeling(value: string) {
+  if (value === "few") return "できるだけ少ない方がいい";
+  if (value === "worth") return "得なら多少の手間は気にしない";
+  if (value === "normal") return "普通くらいなら大丈夫";
+  if (value === "many") return "多くてもあまり気にしない";
   return "未選択";
 }
 
-function mapStress(value: string) {
-  if (value === "complex") return "複雑でわかりにくいこと";
-  if (value === "no_benefit") return "お得さを感じにくいこと";
-  if (value === "unclear") return "何を基準に見ればいいかわからないこと";
-  if (value === "limited") return "あとで選択肢が足りなくなること";
+function mapStopReason(value: string) {
+  if (value === "complex") return "むずかしくて面倒に感じる";
+  if (value === "no_benefit") return "お得さを感じられなくなる";
+  if (value === "not_fit") return "自分に合っているかわからなくなる";
+  if (value === "not_enough") return "やれることが少なくて物足りなくなる";
   return "未選択";
 }
 
-function mapIdealState(value: string) {
-  if (value === "keep_easy") return "無理なく自然に積立が続いている";
-  if (value === "keep_reward") return "還元やメリットを感じながら続けられている";
-  if (value === "keep_safe") return "無難で安心感のある選び方ができている";
-  if (value === "keep_expand") return "積立の先の選択肢も見えている";
+function mapIdealAfterYear(value: string) {
+  if (value === "natural") return "何も無理せず自然に積立が続いている";
+  if (value === "reward_keep") return "還元をうまく使いながら続けられている";
+  if (value === "calm") return "不安なく落ち着いて続けられている";
+  if (value === "expand_keep") return "積立以外も少し見えるようになっている";
   return "未選択";
 }

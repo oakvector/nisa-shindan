@@ -1,10 +1,10 @@
 type ResultPageProps = {
   searchParams: Promise<{
-    mistakeFear?: string;
-    decisionStyle?: string;
-    priority?: string;
-    supportNeed?: string;
-    futureConcern?: string;
+    avoidMost?: string;
+    whenLost?: string;
+    firstLook?: string;
+    supportLevel?: string;
+    oneYear安心?: string;
   }>;
 };
 
@@ -19,11 +19,11 @@ type BrokerResult = {
 };
 
 type FailureStyleKey =
-  | "safe_simple"
-  | "reward_guard"
-  | "balanced_safe"
-  | "future_safe"
-  | "support_safe";
+  | "no_confusion"
+  | "benefit_guard"
+  | "safe_choice"
+  | "future_ready"
+  | "support_relief";
 
 type FailureStyleInfo = {
   title: string;
@@ -32,34 +32,34 @@ type FailureStyleInfo = {
 };
 
 const styleMaster: Record<FailureStyleKey, FailureStyleInfo> = {
-  safe_simple: {
+  no_confusion: {
     title: "迷いにくい安心型",
     description:
-      "複雑すぎず、わかりやすく始められることを重視するタイプです。最初のつまずきを避けながら、無理なく続けられる候補と相性が良い傾向があります。",
+      "むずかしすぎると続かないので、なるべくわかりやすく始めたいタイプです。迷いにくさや始めやすさと相性が良い候補を選びやすい傾向があります。",
     points: ["わかりやすさ", "始めやすさ", "少額積立", "迷いにくさ"],
   },
-  reward_guard: {
-    title: "還元取りこぼし防止型",
+  benefit_guard: {
+    title: "お得取りこぼし防止型",
     description:
-      "どうせ始めるなら、還元やクレカ積立のメリットを取りこぼしたくないタイプです。ポイント活用や経済圏との相性も重視しやすい傾向があります。",
-    points: ["ポイント還元", "クレカ積立", "経済圏との相性", "継続しやすさ"],
+      "どうせ始めるなら、お得さを取りこぼしたくないタイプです。ポイント還元やクレカ積立の相性を重視しやすい傾向があります。",
+    points: ["ポイント還元", "クレカ積立", "経済圏との相性", "続けやすさ"],
   },
-  balanced_safe: {
-    title: "バランス確認型",
+  safe_choice: {
+    title: "無難に後悔しにくい型",
     description:
-      "極端に偏るのではなく、総合力の高い候補を選んで後悔を減らしたいタイプです。無難さと納得感の両方を見たい傾向があります。",
-    points: ["総合力", "使いやすさ", "商品ラインナップ", "継続しやすさ"],
+      "大きな失敗を避けながら、全体のバランスで納得したいタイプです。総合力や使いやすさを見て選ぶと後悔しにくい傾向があります。",
+    points: ["総合力", "使いやすさ", "安心感", "継続しやすさ"],
   },
-  future_safe: {
-    title: "機能不足回避型",
+  future_ready: {
+    title: "将来不足しにくい型",
     description:
-      "今は初心者でも、あとで物足りなくなるのは避けたいタイプです。将来の選択肢や拡張性まで視野に入れて選びたい傾向があります。",
-    points: ["拡張性", "米国株対応", "商品ラインナップ", "総合力"],
+      "今は初心者でも、あとで物足りなくなるのは避けたいタイプです。商品ラインナップや将来の広がりを見やすい候補と相性が良い傾向があります。",
+    points: ["商品ラインナップ", "拡張性", "米国株対応", "将来の自由度"],
   },
-  support_safe: {
-    title: "サポート重視型",
+  support_relief: {
+    title: "サポート安心型",
     description:
-      "始める段階で迷いすぎないよう、サポートや案内のわかりやすさを重視するタイプです。使いやすさや安心感と相性が良い候補を選びやすい傾向があります。",
+      "困ったときに、案内やサポートのわかりやすさがあると安心できるタイプです。操作のしやすさや説明のわかりやすさと相性が良い傾向があります。",
     points: ["サポート", "使いやすさ", "始めやすさ", "迷いにくさ"],
   },
 };
@@ -69,18 +69,18 @@ export default async function FailureSafeResultPage({
 }: ResultPageProps) {
   const params = await searchParams;
 
-  const mistakeFear = params.mistakeFear ?? "";
-  const decisionStyle = params.decisionStyle ?? "";
-  const priority = params.priority ?? "";
-  const supportNeed = params.supportNeed ?? "";
-  const futureConcern = params.futureConcern ?? "";
+  const avoidMost = params.avoidMost ?? "";
+  const whenLost = params.whenLost ?? "";
+  const firstLook = params.firstLook ?? "";
+  const supportLevel = params.supportLevel ?? "";
+  const oneYear安心 = params.oneYear安心 ?? "";
 
   const styleScores: Record<FailureStyleKey, number> = {
-    safe_simple: 0,
-    reward_guard: 0,
-    balanced_safe: 0,
-    future_safe: 0,
-    support_safe: 0,
+    no_confusion: 0,
+    benefit_guard: 0,
+    safe_choice: 0,
+    future_ready: 0,
+    support_relief: 0,
   };
 
   const brokers: BrokerResult[] = [
@@ -145,138 +145,161 @@ export default async function FailureSafeResultPage({
     if (broker) broker.score += score;
   };
 
-  if (mistakeFear === "too_complex") {
-    addStyle("safe_simple", 3);
-    addStyle("support_safe", 1);
+  if (avoidMost === "too_hard") {
+    addStyle("no_confusion", 2);
+    addStyle("support_relief", 1);
     addBroker("松井証券", 3);
-    addBroker("楽天証券", 1);
-  }
-  if (mistakeFear === "miss_rewards") {
-    addStyle("reward_guard", 3);
-    addBroker("SBI証券", 2);
     addBroker("楽天証券", 2);
-    addBroker("三菱UFJ eスマート証券", 1);
   }
-  if (mistakeFear === "lack_features") {
-    addStyle("future_safe", 3);
-    addBroker("SBI証券", 2);
+  if (avoidMost === "miss_benefit") {
+    addStyle("benefit_guard", 3);
+    addBroker("SBI証券", 3);
+    addBroker("楽天証券", 3);
+    addBroker("三菱UFJ eスマート証券", 2);
+  }
+  if (avoidMost === "lack_future") {
+    addStyle("future_ready", 3);
     addBroker("マネックス証券", 3);
+    addBroker("SBI証券", 2);
   }
-  if (mistakeFear === "wrong_choice") {
-    addStyle("balanced_safe", 3);
+  if (avoidMost === "wrong_fit") {
+    addStyle("safe_choice", 3);
     addBroker("SBI証券", 2);
     addBroker("楽天証券", 1);
     addBroker("松井証券", 1);
   }
 
-  if (decisionStyle === "simple") {
-    addStyle("safe_simple", 2);
-    addStyle("support_safe", 1);
+  if (whenLost === "quick") {
+    addStyle("no_confusion", 2);
+    addStyle("support_relief", 1);
     addBroker("松井証券", 2);
     addBroker("楽天証券", 1);
   }
-  if (decisionStyle === "benefit") {
-    addStyle("reward_guard", 2);
-    addBroker("SBI証券", 2);
-    addBroker("楽天証券", 2);
-  }
-  if (decisionStyle === "balanced") {
-    addStyle("balanced_safe", 2);
-    addBroker("SBI証券", 2);
-    addBroker("楽天証券", 1);
-    addBroker("松井証券", 1);
-  }
-  if (decisionStyle === "future") {
-    addStyle("future_safe", 2);
-    addBroker("SBI証券", 1);
-    addBroker("マネックス証券", 2);
-  }
-
-  if (priority === "ease") {
-    addStyle("safe_simple", 1);
-    addStyle("support_safe", 2);
-    addBroker("松井証券", 2);
-    addBroker("楽天証券", 1);
-  }
-  if (priority === "points") {
-    addStyle("reward_guard", 2);
+  if (whenLost === "deal") {
+    addStyle("benefit_guard", 2);
     addBroker("SBI証券", 2);
     addBroker("楽天証券", 2);
     addBroker("三菱UFJ eスマート証券", 1);
   }
-  if (priority === "support") {
-    addStyle("support_safe", 3);
-    addBroker("松井証券", 3);
+  if (whenLost === "safe") {
+    addStyle("safe_choice", 2);
+    addBroker("SBI証券", 2);
     addBroker("楽天証券", 1);
+    addBroker("松井証券", 1);
   }
-  if (priority === "products") {
-    addStyle("future_safe", 2);
-    addStyle("balanced_safe", 1);
+  if (whenLost === "future") {
+    addStyle("future_ready", 2);
     addBroker("マネックス証券", 2);
     addBroker("SBI証券", 1);
   }
 
-  if (supportNeed === "very_high") {
-    addStyle("support_safe", 3);
+  if (firstLook === "easy") {
+    addStyle("no_confusion", 1);
+    addStyle("support_relief", 1);
+    addBroker("松井証券", 2);
+    addBroker("楽天証券", 2);
+  }
+  if (firstLook === "points") {
+    addStyle("benefit_guard", 2);
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 2);
+    addBroker("三菱UFJ eスマート証券", 2);
+  }
+  if (firstLook === "support") {
+    addStyle("support_relief", 3);
     addBroker("松井証券", 3);
     addBroker("楽天証券", 1);
   }
-  if (supportNeed === "important") {
-    addStyle("support_safe", 2);
-    addStyle("safe_simple", 1);
+  if (firstLook === "products") {
+    addStyle("future_ready", 2);
+    addBroker("マネックス証券", 2);
+    addBroker("SBI証券", 1);
+  }
+
+  if (supportLevel === "very_need") {
+    addStyle("support_relief", 3);
+    addBroker("松井証券", 3);
+    addBroker("楽天証券", 1);
+  }
+  if (supportLevel === "need") {
+    addStyle("support_relief", 2);
+    addStyle("no_confusion", 1);
     addBroker("松井証券", 2);
     addBroker("楽天証券", 1);
   }
-  if (supportNeed === "normal") {
-    addStyle("balanced_safe", 1);
+  if (supportLevel === "normal") {
+    addStyle("safe_choice", 1);
     addBroker("SBI証券", 1);
     addBroker("楽天証券", 1);
   }
-  if (supportNeed === "low") {
-    addStyle("future_safe", 1);
-    addStyle("reward_guard", 1);
-    addBroker("SBI証券", 1);
+  if (supportLevel === "self") {
+    addStyle("future_ready", 1);
+    addStyle("benefit_guard", 1);
     addBroker("マネックス証券", 1);
+    addBroker("SBI証券", 1);
   }
 
-  if (futureConcern === "keep_going") {
-    addStyle("safe_simple", 2);
-    addStyle("support_safe", 1);
+  if (oneYear安心 === "easy_continue") {
+    addStyle("no_confusion", 2);
+    addStyle("support_relief", 1);
     addBroker("松井証券", 2);
     addBroker("楽天証券", 1);
   }
-  if (futureConcern === "maximize_rewards") {
-    addStyle("reward_guard", 2);
+  if (oneYear安心 === "use_benefit") {
+    addStyle("benefit_guard", 2);
     addBroker("SBI証券", 2);
     addBroker("楽天証券", 2);
-    addBroker("三菱UFJ eスマート証券", 1);
+    addBroker("三菱UFJ eスマート証券", 2);
   }
-  if (futureConcern === "safe_choice") {
-    addStyle("balanced_safe", 2);
+  if (oneYear安心 === "no_regret") {
+    addStyle("safe_choice", 2);
     addBroker("SBI証券", 2);
     addBroker("楽天証券", 1);
     addBroker("松井証券", 1);
   }
-  if (futureConcern === "more_options") {
-    addStyle("future_safe", 2);
+  if (oneYear安心 === "future_room") {
+    addStyle("future_ready", 2);
     addBroker("マネックス証券", 2);
     addBroker("SBI証券", 2);
   }
 
   const dominantStyle = (Object.entries(styleScores).sort(
     (a, b) => b[1] - a[1]
-  )[0]?.[0] ?? "balanced_safe") as FailureStyleKey;
+  )[0]?.[0] ?? "safe_choice") as FailureStyleKey;
+
+  if (dominantStyle === "no_confusion") {
+    addBroker("松井証券", 2);
+    addBroker("楽天証券", 1);
+  }
+  if (dominantStyle === "benefit_guard") {
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 2);
+    addBroker("三菱UFJ eスマート証券", 2);
+  }
+  if (dominantStyle === "safe_choice") {
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 1);
+    addBroker("松井証券", 1);
+  }
+  if (dominantStyle === "future_ready") {
+    addBroker("マネックス証券", 3);
+    addBroker("SBI証券", 2);
+  }
+  if (dominantStyle === "support_relief") {
+    addBroker("松井証券", 3);
+    addBroker("楽天証券", 1);
+  }
 
   const styleInfo = styleMaster[dominantStyle];
 
   brokers.forEach((item) => {
     if (item.name === "SBI証券") {
       item.reason =
-        "総合力や還元、拡張性まで含めて後悔しにくい候補を探したい人と相性が良い候補です。";
+        "総合力や還元、将来の選択肢まで含めて、後悔を減らしたい人向けの候補です。";
     }
     if (item.name === "楽天証券") {
       item.reason =
-        "ポイント活用や始めやすさを重視しながら、比較的迷いにくく選びたい人向けの候補です。";
+        "始めやすさとお得さのバランスを感じながら、迷いにくく選びたい人向けの候補です。";
     }
     if (item.name === "マネックス証券") {
       item.reason =
@@ -284,22 +307,22 @@ export default async function FailureSafeResultPage({
     }
     if (item.name === "三菱UFJ eスマート証券") {
       item.reason =
-        "条件が合えば、少額積立や経済圏の活用で失敗感を減らしやすい候補です。";
+        "条件が合えば、少額から始めつつお得さも取りこぼしにくい候補です。";
     }
     if (item.name === "松井証券") {
       item.reason =
-        "複雑すぎるサービスを避けて、わかりやすく始めたい人向けの候補です。";
+        "むずかしすぎるサービスを避けて、わかりやすく安心して始めたい人向けの候補です。";
     }
   });
 
   const sortedResults = [...brokers].sort((a, b) => b.score - a.score).slice(0, 3);
 
   const answerSummary = [
-    { label: "避けたい失敗", value: mapMistakeFear(mistakeFear) },
-    { label: "選ぶときのスタンス", value: mapDecisionStyle(decisionStyle) },
-    { label: "最初に見たいこと", value: mapPriority(priority) },
-    { label: "サポートの重要度", value: mapSupportNeed(supportNeed) },
-    { label: "1年後のイメージ", value: mapFutureConcern(futureConcern) },
+    { label: "避けたい失敗", value: mapAvoidMost(avoidMost) },
+    { label: "迷ったときの考え方", value: mapWhenLost(whenLost) },
+    { label: "最初に見たいこと", value: mapFirstLook(firstLook) },
+    { label: "サポートの重要度", value: mapSupportLevel(supportLevel) },
+    { label: "1年後に安心したい状態", value: mapOneYear(oneYear安心) },
   ];
 
   return (
@@ -516,42 +539,42 @@ export default async function FailureSafeResultPage({
   );
 }
 
-function mapMistakeFear(value: string) {
-  if (value === "too_complex") return "複雑すぎて続かなくなること";
-  if (value === "miss_rewards") return "還元やメリットを取りこぼすこと";
-  if (value === "lack_features") return "あとで機能不足を感じること";
-  if (value === "wrong_choice") return "無難だと思って選んだのに合わないこと";
+function mapAvoidMost(value: string) {
+  if (value === "too_hard") return "むずかしすぎて途中で使わなくなること";
+  if (value === "miss_benefit") return "後からもっとお得な選び方があったと気づくこと";
+  if (value === "lack_future") return "あとで機能や商品が足りないと感じること";
+  if (value === "wrong_fit") return "なんとなく選んで自分に合わなかったと気づくこと";
   return "未選択";
 }
 
-function mapDecisionStyle(value: string) {
-  if (value === "simple") return "できるだけ迷わず選びたい";
-  if (value === "benefit") return "メリットが大きい方を選びたい";
-  if (value === "balanced") return "極端ではなく総合力で選びたい";
-  if (value === "future") return "あとで後悔しない拡張性も欲しい";
+function mapWhenLost(value: string) {
+  if (value === "quick") return "なるべく迷わず決めたい";
+  if (value === "deal") return "お得な方をちゃんと選びたい";
+  if (value === "safe") return "無難で失敗しにくい方を選びたい";
+  if (value === "future") return "あとで困らない方を選びたい";
   return "未選択";
 }
 
-function mapPriority(value: string) {
-  if (value === "ease") return "使いやすさ";
-  if (value === "points") return "ポイントや還元";
-  if (value === "support") return "サポートやわかりやすさ";
-  if (value === "products") return "商品ラインナップ";
+function mapFirstLook(value: string) {
+  if (value === "easy") return "使いやすそうか";
+  if (value === "points") return "ポイントや還元があるか";
+  if (value === "support") return "説明やサポートがわかりやすいか";
+  if (value === "products") return "商品や選択肢が十分あるか";
   return "未選択";
 }
 
-function mapSupportNeed(value: string) {
-  if (value === "very_high") return "かなり重要";
-  if (value === "important") return "ある程度重要";
+function mapSupportLevel(value: string) {
+  if (value === "very_need") return "かなり欲しい";
+  if (value === "need") return "あった方が安心";
   if (value === "normal") return "普通";
-  if (value === "low") return "あまり重視しない";
+  if (value === "self") return "自分で調べるのであまり気にしない";
   return "未選択";
 }
 
-function mapFutureConcern(value: string) {
-  if (value === "keep_going") return "まずは無理なく積立を続けていたい";
-  if (value === "maximize_rewards") return "還元やお得さを活かせていたい";
-  if (value === "safe_choice") return "無難で後悔の少ない選び方をしていたい";
-  if (value === "more_options") return "選択肢の広い口座を使えていたい";
+function mapOneYear(value: string) {
+  if (value === "easy_continue") return "無理なく積立が続いていること";
+  if (value === "use_benefit") return "ちゃんとお得さを活かせていること";
+  if (value === "no_regret") return "大きな後悔なく選べていること";
+  if (value === "future_room") return "後から別の投資にも広げやすいこと";
   return "未選択";
 }

@@ -3,31 +3,31 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function ShindanPage() {
+export default function StyleShindanPage() {
   const router = useRouter();
 
-  const [startStyle, setStartStyle] = useState("");
-  const [priority, setPriority] = useState("");
-  const [continuity, setContinuity] = useState("");
-  const [complexity, setComplexity] = useState("");
-  const [futureView, setFutureView] = useState("");
+  const [startMood, setStartMood] = useState("");
+  const [firstCheck, setFirstCheck] = useState("");
+  const [continueStyle, setContinueStyle] = useState("");
+  const [featureFeeling, setFeatureFeeling] = useState("");
+  const [oneYearLater, setOneYearLater] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const params = new URLSearchParams({
-      startStyle,
-      priority,
-      continuity,
-      complexity,
-      futureView,
+      startMood,
+      firstCheck,
+      continueStyle,
+      featureFeeling,
+      oneYearLater,
     });
 
     router.push(`/result?${params.toString()}`);
   };
 
   const allAnswered =
-    startStyle && priority && continuity && complexity && futureView;
+    startMood && firstCheck && continueStyle && featureFeeling && oneYearLater;
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
@@ -41,7 +41,7 @@ export default function ShindanPage() {
 
           <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
             <a href="/shindan" className="transition hover:text-slate-900">
-              診断する
+              診断一覧
             </a>
             <a href="/how-it-works" className="transition hover:text-slate-900">
               使い方
@@ -67,8 +67,9 @@ export default function ShindanPage() {
             </h1>
 
             <p className="mb-6 text-base leading-8 text-slate-600 sm:text-lg">
-              5つの質問から、あなたに合う証券口座の選び方を整理します。
-              重視する考え方や続けやすさの感覚から、相性の良い候補を見つけやすくします。
+              5つの質問から、あなたがどんな考え方で口座を選ぶと納得しやすいかを整理します。
+              「始めやすさ」「お得さ」「バランス」「将来の広がり」などの感覚から、
+              相性の良い候補を見つけやすくする診断です。
             </p>
 
             <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
@@ -84,9 +85,9 @@ export default function ShindanPage() {
               <div className="flex flex-wrap gap-2">
                 {[
                   "始めやすさ",
-                  "還元重視",
+                  "お得さ",
                   "バランス感覚",
-                  "拡張性",
+                  "将来の広がり",
                   "続けやすさ",
                 ].map((item) => (
                   <span
@@ -104,9 +105,9 @@ export default function ShindanPage() {
                 結果でわかること
               </p>
               <ol className="space-y-3 text-sm text-slate-600">
-                <li>1. あなたの資産形成スタイル</li>
-                <li>2. 相性が良い証券口座候補</li>
-                <li>3. 比較時に重視したいポイント</li>
+                <li>1. あなたの口座選びのタイプ</li>
+                <li>2. 相性の良い証券口座候補</li>
+                <li>3. 比較するときに重視したいポイント</li>
               </ol>
             </div>
           </div>
@@ -116,7 +117,7 @@ export default function ShindanPage() {
               <div>
                 <p className="text-sm font-semibold text-blue-700">質問に回答</p>
                 <h2 className="mt-1 text-2xl font-bold text-slate-950">
-                  あなたの考え方に近いものを選んでください
+                  いちばん近いものを選んでください
                 </h2>
               </div>
               <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
@@ -125,158 +126,158 @@ export default function ShindanPage() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
-              <QuestionCard title="質問1: 投資を始めるとき、いちばん近い気持ちは？">
+              <QuestionCard title="質問1: NISAを始めるなら、いちばん近い気持ちはどれですか？">
                 <RadioOption
-                  name="startStyle"
-                  value="safe"
-                  checked={startStyle === "safe"}
-                  onChange={setStartStyle}
-                  label="まずは失敗しにくく始めたい"
+                  name="startMood"
+                  value="easy_start"
+                  checked={startMood === "easy_start"}
+                  onChange={setStartMood}
+                  label="まずはむずかしくないところから始めたい"
                 />
                 <RadioOption
-                  name="startStyle"
-                  value="reward"
-                  checked={startStyle === "reward"}
-                  onChange={setStartStyle}
-                  label="せっかくならお得さも重視したい"
+                  name="startMood"
+                  value="good_deal"
+                  checked={startMood === "good_deal"}
+                  onChange={setStartMood}
+                  label="どうせ始めるなら、お得さも大事にしたい"
                 />
                 <RadioOption
-                  name="startStyle"
-                  value="balanced"
-                  checked={startStyle === "balanced"}
-                  onChange={setStartStyle}
-                  label="バランスよく選びたい"
+                  name="startMood"
+                  value="balanced_choice"
+                  checked={startMood === "balanced_choice"}
+                  onChange={setStartMood}
+                  label="なるべくバランスのいいところを選びたい"
                 />
                 <RadioOption
-                  name="startStyle"
-                  value="expand"
-                  checked={startStyle === "expand"}
-                  onChange={setStartStyle}
-                  label="将来の選択肢の広さも見たい"
+                  name="startMood"
+                  value="future_room"
+                  checked={startMood === "future_room"}
+                  onChange={setStartMood}
+                  label="将来やりたいことが増えても困らない口座がいい"
                 />
               </QuestionCard>
 
-              <QuestionCard title="質問2: 証券口座を選ぶとき、何が一番気になりますか？">
+              <QuestionCard title="質問2: 口座を選ぶとき、いちばん気になるのはどれですか？">
                 <RadioOption
-                  name="priority"
-                  value="ease"
-                  checked={priority === "ease"}
-                  onChange={setPriority}
-                  label="使いやすさ"
+                  name="firstCheck"
+                  value="easy_screen"
+                  checked={firstCheck === "easy_screen"}
+                  onChange={setFirstCheck}
+                  label="画面や操作がわかりやすいこと"
                 />
                 <RadioOption
-                  name="priority"
+                  name="firstCheck"
                   value="points"
-                  checked={priority === "points"}
-                  onChange={setPriority}
-                  label="ポイントや還元"
+                  checked={firstCheck === "points"}
+                  onChange={setFirstCheck}
+                  label="ポイントや還元があること"
                 />
                 <RadioOption
-                  name="priority"
+                  name="firstCheck"
                   value="balance"
-                  checked={priority === "balance"}
-                  onChange={setPriority}
-                  label="総合力"
+                  checked={firstCheck === "balance"}
+                  onChange={setFirstCheck}
+                  label="いろいろ見たときに全体のバランスがいいこと"
                 />
                 <RadioOption
-                  name="priority"
-                  value="products"
-                  checked={priority === "products"}
-                  onChange={setPriority}
-                  label="商品ラインナップ"
-                />
-              </QuestionCard>
-
-              <QuestionCard title="質問3: 積立を続けるうえで重要だと思うのは？">
-                <RadioOption
-                  name="continuity"
-                  value="simple"
-                  checked={continuity === "simple"}
-                  onChange={setContinuity}
-                  label="手間が少ないこと"
-                />
-                <RadioOption
-                  name="continuity"
-                  value="benefit"
-                  checked={continuity === "benefit"}
-                  onChange={setContinuity}
-                  label="還元やメリットがあること"
-                />
-                <RadioOption
-                  name="continuity"
-                  value="stable"
-                  checked={continuity === "stable"}
-                  onChange={setContinuity}
-                  label="無難でバランスが良いこと"
-                />
-                <RadioOption
-                  name="continuity"
-                  value="expandable"
-                  checked={continuity === "expandable"}
-                  onChange={setContinuity}
-                  label="今後の拡張性があること"
+                  name="firstCheck"
+                  value="many_products"
+                  checked={firstCheck === "many_products"}
+                  onChange={setFirstCheck}
+                  label="取り扱っている商品が多いこと"
                 />
               </QuestionCard>
 
-              <QuestionCard title="質問4: 情報量の多いサービスについてどう感じますか？">
+              <QuestionCard title="質問3: 積立を続けるなら、どんな形が理想ですか？">
                 <RadioOption
-                  name="complexity"
-                  value="simple"
-                  checked={complexity === "simple"}
-                  onChange={setComplexity}
-                  label="できるだけシンプルな方がいい"
+                  name="continueStyle"
+                  value="auto_continue"
+                  checked={continueStyle === "auto_continue"}
+                  onChange={setContinueStyle}
+                  label="あまり考えずにそのまま続けられる形"
                 />
                 <RadioOption
-                  name="complexity"
-                  value="benefit"
-                  checked={complexity === "benefit"}
-                  onChange={setComplexity}
-                  label="多少多くてもメリットがあるならOK"
+                  name="continueStyle"
+                  value="feel_benefit"
+                  checked={continueStyle === "feel_benefit"}
+                  onChange={setContinueStyle}
+                  label="ちょっと得している実感がある形"
                 />
                 <RadioOption
-                  name="complexity"
-                  value="middle"
-                  checked={complexity === "middle"}
-                  onChange={setComplexity}
-                  label="バランス次第"
+                  name="continueStyle"
+                  value="safe_continue"
+                  checked={continueStyle === "safe_continue"}
+                  onChange={setContinueStyle}
+                  label="変に偏らず安心して続けられる形"
                 />
                 <RadioOption
-                  name="complexity"
-                  value="many"
-                  checked={complexity === "many"}
-                  onChange={setComplexity}
-                  label="多機能でも問題ない"
+                  name="continueStyle"
+                  value="expand_later"
+                  checked={continueStyle === "expand_later"}
+                  onChange={setContinueStyle}
+                  label="将来ほかの投資にも広げやすい形"
                 />
               </QuestionCard>
 
-              <QuestionCard title="質問5: NISAの先も考えるなら、どちらに近いですか？">
+              <QuestionCard title="質問4: サービスに機能が多いと、どう感じますか？">
                 <RadioOption
-                  name="futureView"
-                  value="continue"
-                  checked={futureView === "continue"}
-                  onChange={setFutureView}
-                  label="まずは積立を無理なく続けたい"
+                  name="featureFeeling"
+                  value="simple_is_best"
+                  checked={featureFeeling === "simple_is_best"}
+                  onChange={setFeatureFeeling}
+                  label="できればシンプルな方が安心"
                 />
                 <RadioOption
-                  name="futureView"
-                  value="reward"
-                  checked={futureView === "reward"}
-                  onChange={setFutureView}
-                  label="お得さを活かして続けたい"
+                  name="featureFeeling"
+                  value="ok_if_benefit"
+                  checked={featureFeeling === "ok_if_benefit"}
+                  onChange={setFeatureFeeling}
+                  label="メリットがあるなら多少多くてもOK"
                 />
                 <RadioOption
-                  name="futureView"
-                  value="balance"
-                  checked={futureView === "balance"}
-                  onChange={setFutureView}
-                  label="長く使える無難な口座がいい"
+                  name="featureFeeling"
+                  value="middle_best"
+                  checked={featureFeeling === "middle_best"}
+                  onChange={setFeatureFeeling}
+                  label="多すぎず少なすぎずがいい"
                 />
                 <RadioOption
-                  name="futureView"
-                  value="global"
-                  checked={futureView === "global"}
-                  onChange={setFutureView}
-                  label="米国株なども視野に入れたい"
+                  name="featureFeeling"
+                  value="many_ok"
+                  checked={featureFeeling === "many_ok"}
+                  onChange={setFeatureFeeling}
+                  label="多機能でも自分で使い分けられる"
+                />
+              </QuestionCard>
+
+              <QuestionCard title="質問5: 1年後に『この口座でよかった』と思いたいのはどんな状態ですか？">
+                <RadioOption
+                  name="oneYearLater"
+                  value="easy_keep"
+                  checked={oneYearLater === "easy_keep"}
+                  onChange={setOneYearLater}
+                  label="無理なく積立が続いている"
+                />
+                <RadioOption
+                  name="oneYearLater"
+                  value="benefit_keep"
+                  checked={oneYearLater === "benefit_keep"}
+                  onChange={setOneYearLater}
+                  label="還元やポイントをうまく活かせている"
+                />
+                <RadioOption
+                  name="oneYearLater"
+                  value="no_big_complaint"
+                  checked={oneYearLater === "no_big_complaint"}
+                  onChange={setOneYearLater}
+                  label="特に大きな不満なく使えている"
+                />
+                <RadioOption
+                  name="oneYearLater"
+                  value="expand_future"
+                  checked={oneYearLater === "expand_future"}
+                  onChange={setOneYearLater}
+                  label="NISA以外にも広げやすくなっている"
                 />
               </QuestionCard>
 
@@ -286,11 +287,11 @@ export default function ShindanPage() {
                 </p>
                 <p className="text-sm text-slate-600">
                   {[
-                    startStyle,
-                    priority,
-                    continuity,
-                    complexity,
-                    futureView,
+                    startMood,
+                    firstCheck,
+                    continueStyle,
+                    featureFeeling,
+                    oneYearLater,
                   ].filter(Boolean).length}
                   /5 問入力済み
                 </p>

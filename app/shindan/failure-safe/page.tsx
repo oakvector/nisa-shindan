@@ -6,28 +6,28 @@ import { useRouter } from "next/navigation";
 export default function FailureSafeShindanPage() {
   const router = useRouter();
 
-  const [mistakeFear, setMistakeFear] = useState("");
-  const [decisionStyle, setDecisionStyle] = useState("");
-  const [priority, setPriority] = useState("");
-  const [supportNeed, setSupportNeed] = useState("");
-  const [futureConcern, setFutureConcern] = useState("");
+  const [avoidMost, setAvoidMost] = useState("");
+  const [whenLost, setWhenLost] = useState("");
+  const [firstLook, setFirstLook] = useState("");
+  const [supportLevel, setSupportLevel] = useState("");
+  const [oneYear安心, setOneYear安心] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const params = new URLSearchParams({
-      mistakeFear,
-      decisionStyle,
-      priority,
-      supportNeed,
-      futureConcern,
+      avoidMost,
+      whenLost,
+      firstLook,
+      supportLevel,
+      oneYear安心,
     });
 
     router.push(`/shindan/failure-safe/result?${params.toString()}`);
   };
 
   const allAnswered =
-    mistakeFear && decisionStyle && priority && supportNeed && futureConcern;
+    avoidMost && whenLost && firstLook && supportLevel && oneYear安心;
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
@@ -67,8 +67,9 @@ export default function FailureSafeShindanPage() {
             </h1>
 
             <p className="mb-6 text-base leading-8 text-slate-600 sm:text-lg">
-              5つの質問から、あなたが避けたい失敗や迷いやすいポイントを整理し、
-              相性の良い証券口座候補を見つけやすくする診断です。
+              5つの質問から、あなたが避けたい失敗や不安を整理します。
+              「むずかしすぎるのは嫌」「あとで後悔したくない」などの感覚から、
+              相性の良い候補を見つけやすくする診断です。
             </p>
 
             <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
@@ -84,10 +85,10 @@ export default function FailureSafeShindanPage() {
               <div className="flex flex-wrap gap-2">
                 {[
                   "迷いにくさ",
-                  "始めやすさ",
+                  "後悔しにくさ",
                   "サポート",
-                  "還元の取りこぼし",
-                  "機能不足の回避",
+                  "お得さの取りこぼし",
+                  "将来の不足感",
                 ].map((item) => (
                   <span
                     key={item}
@@ -106,7 +107,7 @@ export default function FailureSafeShindanPage() {
               <ol className="space-y-3 text-sm text-slate-600">
                 <li>1. あなたが避けたい失敗パターン</li>
                 <li>2. 相性の良い口座タイプ</li>
-                <li>3. 比較時に見落としにくい候補</li>
+                <li>3. 比較するときに見落としやすいポイント</li>
               </ol>
             </div>
           </div>
@@ -116,7 +117,7 @@ export default function FailureSafeShindanPage() {
               <div>
                 <p className="text-sm font-semibold text-blue-700">質問に回答</p>
                 <h2 className="mt-1 text-2xl font-bold text-slate-950">
-                  失敗したくないポイントに近いものを選んでください
+                  いちばん近いものを選んでください
                 </h2>
               </div>
               <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
@@ -125,158 +126,158 @@ export default function FailureSafeShindanPage() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
-              <QuestionCard title="質問1: いちばん避けたいのはどれですか？">
+              <QuestionCard title="質問1: 口座選びで、いちばん避けたいのはどれですか？">
                 <RadioOption
-                  name="mistakeFear"
-                  value="too_complex"
-                  checked={mistakeFear === "too_complex"}
-                  onChange={setMistakeFear}
-                  label="複雑すぎて続かなくなること"
+                  name="avoidMost"
+                  value="too_hard"
+                  checked={avoidMost === "too_hard"}
+                  onChange={setAvoidMost}
+                  label="むずかしすぎて途中で使わなくなること"
                 />
                 <RadioOption
-                  name="mistakeFear"
-                  value="miss_rewards"
-                  checked={mistakeFear === "miss_rewards"}
-                  onChange={setMistakeFear}
-                  label="還元やメリットを取りこぼすこと"
+                  name="avoidMost"
+                  value="miss_benefit"
+                  checked={avoidMost === "miss_benefit"}
+                  onChange={setAvoidMost}
+                  label="後からもっとお得な選び方があったと気づくこと"
                 />
                 <RadioOption
-                  name="mistakeFear"
-                  value="lack_features"
-                  checked={mistakeFear === "lack_features"}
-                  onChange={setMistakeFear}
-                  label="あとで機能不足を感じること"
+                  name="avoidMost"
+                  value="lack_future"
+                  checked={avoidMost === "lack_future"}
+                  onChange={setAvoidMost}
+                  label="あとで機能や商品が足りないと感じること"
                 />
                 <RadioOption
-                  name="mistakeFear"
-                  value="wrong_choice"
-                  checked={mistakeFear === "wrong_choice"}
-                  onChange={setMistakeFear}
-                  label="無難だと思って選んだのに合わないこと"
+                  name="avoidMost"
+                  value="wrong_fit"
+                  checked={avoidMost === "wrong_fit"}
+                  onChange={setAvoidMost}
+                  label="なんとなく選んで自分に合わなかったと気づくこと"
                 />
               </QuestionCard>
 
-              <QuestionCard title="質問2: 選ぶときのスタンスはどれに近いですか？">
+              <QuestionCard title="質問2: 迷ったとき、どちらの考え方に近いですか？">
                 <RadioOption
-                  name="decisionStyle"
-                  value="simple"
-                  checked={decisionStyle === "simple"}
-                  onChange={setDecisionStyle}
-                  label="できるだけ迷わず選びたい"
+                  name="whenLost"
+                  value="quick"
+                  checked={whenLost === "quick"}
+                  onChange={setWhenLost}
+                  label="なるべく迷わず決めたい"
                 />
                 <RadioOption
-                  name="decisionStyle"
-                  value="benefit"
-                  checked={decisionStyle === "benefit"}
-                  onChange={setDecisionStyle}
-                  label="メリットが大きい方を選びたい"
+                  name="whenLost"
+                  value="deal"
+                  checked={whenLost === "deal"}
+                  onChange={setWhenLost}
+                  label="お得な方をちゃんと選びたい"
                 />
                 <RadioOption
-                  name="decisionStyle"
-                  value="balanced"
-                  checked={decisionStyle === "balanced"}
-                  onChange={setDecisionStyle}
-                  label="極端ではなく総合力で選びたい"
+                  name="whenLost"
+                  value="safe"
+                  checked={whenLost === "safe"}
+                  onChange={setWhenLost}
+                  label="無難で失敗しにくい方を選びたい"
                 />
                 <RadioOption
-                  name="decisionStyle"
+                  name="whenLost"
                   value="future"
-                  checked={decisionStyle === "future"}
-                  onChange={setDecisionStyle}
-                  label="あとで後悔しない拡張性も欲しい"
+                  checked={whenLost === "future"}
+                  onChange={setWhenLost}
+                  label="あとで困らない方を選びたい"
                 />
               </QuestionCard>
 
-              <QuestionCard title="質問3: 口座を選ぶとき、最初に確認したいのは？">
+              <QuestionCard title="質問3: 口座を見たとき、最初に確認したいのはどれですか？">
                 <RadioOption
-                  name="priority"
-                  value="ease"
-                  checked={priority === "ease"}
-                  onChange={setPriority}
-                  label="使いやすさ"
+                  name="firstLook"
+                  value="easy"
+                  checked={firstLook === "easy"}
+                  onChange={setFirstLook}
+                  label="使いやすそうか"
                 />
                 <RadioOption
-                  name="priority"
+                  name="firstLook"
                   value="points"
-                  checked={priority === "points"}
-                  onChange={setPriority}
-                  label="ポイントや還元"
+                  checked={firstLook === "points"}
+                  onChange={setFirstLook}
+                  label="ポイントや還元があるか"
                 />
                 <RadioOption
-                  name="priority"
+                  name="firstLook"
                   value="support"
-                  checked={priority === "support"}
-                  onChange={setPriority}
-                  label="サポートやわかりやすさ"
+                  checked={firstLook === "support"}
+                  onChange={setFirstLook}
+                  label="説明やサポートがわかりやすいか"
                 />
                 <RadioOption
-                  name="priority"
+                  name="firstLook"
                   value="products"
-                  checked={priority === "products"}
-                  onChange={setPriority}
-                  label="商品ラインナップ"
+                  checked={firstLook === "products"}
+                  onChange={setFirstLook}
+                  label="商品や選択肢が十分あるか"
                 />
               </QuestionCard>
 
-              <QuestionCard title="質問4: サポートや案内のわかりやすさはどれくらい重要ですか？">
+              <QuestionCard title="質問4: 困ったときに、サポートや説明はどれくらい欲しいですか？">
                 <RadioOption
-                  name="supportNeed"
-                  value="very_high"
-                  checked={supportNeed === "very_high"}
-                  onChange={setSupportNeed}
-                  label="かなり重要"
+                  name="supportLevel"
+                  value="very_need"
+                  checked={supportLevel === "very_need"}
+                  onChange={setSupportLevel}
+                  label="かなり欲しい"
                 />
                 <RadioOption
-                  name="supportNeed"
-                  value="important"
-                  checked={supportNeed === "important"}
-                  onChange={setSupportNeed}
-                  label="ある程度重要"
+                  name="supportLevel"
+                  value="need"
+                  checked={supportLevel === "need"}
+                  onChange={setSupportLevel}
+                  label="あった方が安心"
                 />
                 <RadioOption
-                  name="supportNeed"
+                  name="supportLevel"
                   value="normal"
-                  checked={supportNeed === "normal"}
-                  onChange={setSupportNeed}
+                  checked={supportLevel === "normal"}
+                  onChange={setSupportLevel}
                   label="普通"
                 />
                 <RadioOption
-                  name="supportNeed"
-                  value="low"
-                  checked={supportNeed === "low"}
-                  onChange={setSupportNeed}
-                  label="あまり重視しない"
+                  name="supportLevel"
+                  value="self"
+                  checked={supportLevel === "self"}
+                  onChange={setSupportLevel}
+                  label="自分で調べるのであまり気にしない"
                 />
               </QuestionCard>
 
-              <QuestionCard title="質問5: 1年後を考えたとき、どちらが近いですか？">
+              <QuestionCard title="質問5: 1年後を考えると、どれがいちばん安心ですか？">
                 <RadioOption
-                  name="futureConcern"
-                  value="keep_going"
-                  checked={futureConcern === "keep_going"}
-                  onChange={setFutureConcern}
-                  label="まずは無理なく積立を続けていたい"
+                  name="oneYear安心"
+                  value="easy_continue"
+                  checked={oneYear安心 === "easy_continue"}
+                  onChange={setOneYear安心}
+                  label="無理なく積立が続いていること"
                 />
                 <RadioOption
-                  name="futureConcern"
-                  value="maximize_rewards"
-                  checked={futureConcern === "maximize_rewards"}
-                  onChange={setFutureConcern}
-                  label="還元やお得さを活かせていたい"
+                  name="oneYear安心"
+                  value="use_benefit"
+                  checked={oneYear安心 === "use_benefit"}
+                  onChange={setOneYear安心}
+                  label="ちゃんとお得さを活かせていること"
                 />
                 <RadioOption
-                  name="futureConcern"
-                  value="safe_choice"
-                  checked={futureConcern === "safe_choice"}
-                  onChange={setFutureConcern}
-                  label="無難で後悔の少ない選び方をしていたい"
+                  name="oneYear安心"
+                  value="no_regret"
+                  checked={oneYear安心 === "no_regret"}
+                  onChange={setOneYear安心}
+                  label="大きな後悔なく選べていること"
                 />
                 <RadioOption
-                  name="futureConcern"
-                  value="more_options"
-                  checked={futureConcern === "more_options"}
-                  onChange={setFutureConcern}
-                  label="選択肢の広い口座を使えていたい"
+                  name="oneYear安心"
+                  value="future_room"
+                  checked={oneYear安心 === "future_room"}
+                  onChange={setOneYear安心}
+                  label="後から別の投資にも広げやすいこと"
                 />
               </QuestionCard>
 
@@ -285,13 +286,7 @@ export default function FailureSafeShindanPage() {
                   回答状況
                 </p>
                 <p className="text-sm text-slate-600">
-                  {[
-                    mistakeFear,
-                    decisionStyle,
-                    priority,
-                    supportNeed,
-                    futureConcern,
-                  ].filter(Boolean).length}
+                  {[avoidMost, whenLost, firstLook, supportLevel, oneYear安心].filter(Boolean).length}
                   /5 問入力済み
                 </p>
               </div>
