@@ -1,3 +1,6 @@
+import RelatedArticles from "@/components/RelatedArticles";
+import Breadcrumbs from "@/components/Breadcrumbs";
+
 export default function MonexForWhoPage() {
   const strongPoints = [
     {
@@ -29,6 +32,36 @@ export default function MonexForWhoPage() {
     },
   ];
 
+    const relatedArticles = [
+    {
+      title: "SBI証券はどんな人に向いている？",
+      description:
+        "SBI証券が向いている人の特徴や、他社も比較した方がよいケースを整理した記事です。",
+      href: "/articles/sbi-for-who",
+      tag: "単独理解",
+    },
+    {
+      title: "三菱UFJ eスマート証券はどんな人に向いている？",
+      description:
+        "三菱UFJ eスマート証券が向いている人の特徴や、他社も比較した方がよいケースを整理した記事です。",
+      href: "/articles/musmart-for-who",
+      tag: "単独理解",
+    },
+    {
+      title: "SBI証券と楽天証券の違いは？",
+      description:
+        "NISAを始めるときに迷いやすい2社の違いを、初心者にもわかりやすく整理した比較記事です。",
+      href: "/articles/sbi-vs-rakuten",
+      tag: "比較記事",
+    },
+  ];
+
+  const breadcrumbs = [
+  { label: "ホーム", href: "/" },
+  { label: "記事一覧", href: "/articles" },
+  { label: "マネックス証券はどんな人に向いている？" },
+];
+
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 backdrop-blur">
@@ -57,6 +90,7 @@ export default function MonexForWhoPage() {
       </header>
 
       <article className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+        <Breadcrumbs items={breadcrumbs} />
         <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8 md:p-10">
           <p className="mb-3 text-sm font-semibold tracking-wide text-blue-700">
             単独理解記事
@@ -161,6 +195,8 @@ export default function MonexForWhoPage() {
           </p>
         </section>
       </article>
+
+<RelatedArticles heading="将来の広がりを重視する人向けの関連記事" articles={relatedArticles} />
 
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">

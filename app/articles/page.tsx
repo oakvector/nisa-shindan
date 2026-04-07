@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 type Article = {
   title: string;
@@ -96,6 +97,11 @@ export default function ArticlesPage() {
     { key: "broker", label: "単独理解" },
   ];
 
+    const breadcrumbs = [
+    { label: "ホーム", href: "/" },
+    { label: "記事一覧" },
+  ];
+  
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 backdrop-blur">
@@ -124,6 +130,7 @@ export default function ArticlesPage() {
       </header>
 
       <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+        <Breadcrumbs items={breadcrumbs} />
         <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8 md:p-10">
           <p className="mb-3 text-sm font-semibold tracking-wide text-blue-700">
             記事一覧
