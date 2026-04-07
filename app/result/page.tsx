@@ -1,14 +1,14 @@
 type ResultPageProps = {
   searchParams: Promise<{
-    experience?: string;
-    focus?: string;
-    usStocks?: string;
-    creditCard?: string;
-    monthly?: string;
+    startStyle?: string;
+    priority?: string;
+    continuity?: string;
+    complexity?: string;
+    futureView?: string;
   }>;
 };
 
-type ServiceResult = {
+type BrokerResult = {
   name: string;
   slug: string;
   officialUrl: string;
@@ -18,190 +18,295 @@ type ServiceResult = {
   caution: string;
 };
 
+type StyleKey =
+  | "careful"
+  | "reward"
+  | "balanced"
+  | "expansion"
+  | "simple";
+
+type StyleInfo = {
+  title: string;
+  description: string;
+  points: string[];
+};
+
+const styleMaster: Record<StyleKey, StyleInfo> = {
+  careful: {
+    title: "堅実スタート型",
+    description:
+      "まずは失敗しにくく、無理なく始めたいタイプです。複雑さより、始めやすさや分かりやすさを重視しやすい傾向があります。",
+    points: ["始めやすさ", "使いやすさ", "少額積立", "迷いにくさ"],
+  },
+  reward: {
+    title: "還元活用型",
+    description:
+      "積立を続けるなら、お得さや還元も活かしたいタイプです。クレカ積立やポイント活用との相性を重視しやすい傾向があります。",
+    points: ["クレカ積立", "ポイント還元", "経済圏との相性", "継続しやすさ"],
+  },
+  balanced: {
+    title: "バランス重視型",
+    description:
+      "何か一つに特化するより、総合力の高い候補を選びたいタイプです。使いやすさ、商品数、続けやすさのバランスを見やすい傾向があります。",
+    points: ["総合力", "使いやすさ", "商品ラインナップ", "継続しやすさ"],
+  },
+  expansion: {
+    title: "拡張重視型",
+    description:
+      "NISAの先も見据えて、選択肢の広さや拡張性を重視したいタイプです。米国株や商品ラインナップも比較軸に入りやすい傾向があります。",
+    points: ["米国株対応", "商品ラインナップ", "拡張性", "情報量"],
+  },
+  simple: {
+    title: "シンプル継続型",
+    description:
+      "高機能さより、わかりやすく続けやすいことを重視するタイプです。情報量が多すぎず、自然に続けられる候補と相性が良い傾向があります。",
+    points: ["シンプルさ", "使いやすさ", "少額積立", "継続しやすさ"],
+  },
+};
+
 export default async function ResultPage({ searchParams }: ResultPageProps) {
   const params = await searchParams;
 
-  const experience = params.experience ?? "";
-  const focus = params.focus ?? "";
-  const usStocks = params.usStocks ?? "";
-  const creditCard = params.creditCard ?? "";
-  const monthly = params.monthly ?? "";
+  const startStyle = params.startStyle ?? "";
+  const priority = params.priority ?? "";
+  const continuity = params.continuity ?? "";
+  const complexity = params.complexity ?? "";
+  const futureView = params.futureView ?? "";
 
-  const results: ServiceResult[] = [
-  {
-    name: "SBI証券",
-    slug: "sbi-sec",
-    officialUrl: "https://www.sbisec.co.jp/",
-    score: 0,
-    reason: "",
-    strengths: [
-      "総合力が高い",
-      "クレカ積立と相性が良い",
-      "ポイント活用の選択肢が広い",
-    ],
-    caution:
-      "機能が多いため、最初は情報量が多く感じる場合があります。",
-  },
-  {
-    name: "楽天証券",
-    slug: "rakuten-sec",
-    officialUrl: "https://www.rakuten-sec.co.jp/",
-    score: 0,
-    reason: "",
-    strengths: [
-      "楽天ポイントとの相性が良い",
-      "NISA利用者が多い",
-      "初心者にも比較的なじみやすい",
-    ],
-    caution:
-      "楽天経済圏との相性で評価が分かれやすい候補です。",
-  },
-  {
-    name: "マネックス証券",
-    slug: "monex-sec",
-    officialUrl: "https://www.monex.co.jp/",
-    score: 0,
-    reason: "",
-    strengths: [
-      "米国株の比較軸で強い",
-      "商品ラインナップを見たい人向け",
-      "中級者にも相性が良い",
-    ],
-    caution:
-      "ポイント重視だけで選ぶ場合は他候補も比較した方が自然です。",
-  },
-  {
-    name: "三菱UFJ eスマート証券",
-    slug: "musmart-sec",
-    officialUrl: "https://kabu.com/",
-    score: 0,
-    reason: "",
-    strengths: [
-      "au PAYカード積立と相性が良い",
-      "Pontaポイント活用がしやすい",
-      "少額投資との相性が良い",
-    ],
-    caution:
-      "重視する経済圏が異なる場合は優先度が下がることがあります。",
-  },
-  {
-    name: "松井証券",
-    slug: "matsui-sec",
-    officialUrl: "https://www.matsui.co.jp/",
-    score: 0,
-    reason: "",
-    strengths: [
-      "初心者向けの印象が強い",
-      "シンプルに使いやすい",
-      "サポート重視の人と相性が良い",
-    ],
-    caution:
-      "米国株や商品数を最優先するなら他候補も見比べたいところです。",
-  },
-];
+  const styleScores: Record<StyleKey, number> = {
+    careful: 0,
+    reward: 0,
+    balanced: 0,
+    expansion: 0,
+    simple: 0,
+  };
 
-  // 投資経験
-  if (experience === "beginner") {
-    results.find((r) => r.name === "楽天証券")!.score += 2;
-    results.find((r) => r.name === "松井証券")!.score += 3;
-    results.find((r) => r.name === "SBI証券")!.score += 2;
-    results.find((r) => r.name === "三菱UFJ eスマート証券")!.score += 1;
-  }
-  if (experience === "some") {
-    results.find((r) => r.name === "SBI証券")!.score += 2;
-    results.find((r) => r.name === "楽天証券")!.score += 2;
-    results.find((r) => r.name === "マネックス証券")!.score += 2;
-  }
-  if (experience === "advanced") {
-    results.find((r) => r.name === "SBI証券")!.score += 2;
-    results.find((r) => r.name === "マネックス証券")!.score += 3;
-  }
+  const brokers: BrokerResult[] = [
+    {
+      name: "SBI証券",
+      slug: "sbi-sec",
+      officialUrl: "https://www.sbisec.co.jp/",
+      score: 0,
+      reason: "",
+      strengths: ["総合力が高い", "クレカ積立と相性が良い", "商品ラインナップが広い"],
+      caution:
+        "機能が多いため、最初は情報量が多く感じる場合があります。",
+    },
+    {
+      name: "楽天証券",
+      slug: "rakuten-sec",
+      officialUrl: "https://www.rakuten-sec.co.jp/",
+      score: 0,
+      reason: "",
+      strengths: ["ポイント活用しやすい", "NISA利用者が多い", "比較的なじみやすい"],
+      caution:
+        "重視する経済圏によって評価が分かれやすい候補です。",
+    },
+    {
+      name: "マネックス証券",
+      slug: "monex-sec",
+      officialUrl: "https://www.monex.co.jp/",
+      score: 0,
+      reason: "",
+      strengths: ["米国株重視と相性が良い", "商品ラインナップを見たい人向け", "比較軸を広げやすい"],
+      caution:
+        "シンプルさやポイント重視だけなら他候補も比較したいところです。",
+    },
+    {
+      name: "三菱UFJ eスマート証券",
+      slug: "musmart-sec",
+      officialUrl: "https://kabu.com/",
+      score: 0,
+      reason: "",
+      strengths: ["au / Ponta経済圏と相性が良い", "少額積立と相性が良い", "条件が合う人には候補化しやすい"],
+      caution:
+        "経済圏との相性が薄い場合は優先度が下がることがあります。",
+    },
+    {
+      name: "松井証券",
+      slug: "matsui-sec",
+      officialUrl: "https://www.matsui.co.jp/",
+      score: 0,
+      reason: "",
+      strengths: ["初心者向け", "シンプルに使いやすい", "始めやすさを重視しやすい"],
+      caution:
+        "商品ラインナップや米国株を最優先する場合は他候補も見比べたいです。",
+    },
+  ];
 
-  // 重視ポイント
-  if (focus === "points") {
-    results.find((r) => r.name === "楽天証券")!.score += 3;
-    results.find((r) => r.name === "SBI証券")!.score += 3;
-    results.find((r) => r.name === "三菱UFJ eスマート証券")!.score += 2;
+  const addBroker = (name: string, score: number) => {
+    const broker = brokers.find((b) => b.name === name);
+    if (broker) broker.score += score;
+  };
+
+  const addStyle = (style: StyleKey, score: number) => {
+    styleScores[style] += score;
+  };
+
+  // 質問1
+  if (startStyle === "safe") {
+    addStyle("careful", 3);
+    addStyle("simple", 2);
+    addBroker("松井証券", 3);
+    addBroker("楽天証券", 1);
+    addBroker("三菱UFJ eスマート証券", 1);
   }
-  if (focus === "ease") {
-    results.find((r) => r.name === "松井証券")!.score += 3;
-    results.find((r) => r.name === "楽天証券")!.score += 2;
-    results.find((r) => r.name === "三菱UFJ eスマート証券")!.score += 1;
+  if (startStyle === "reward") {
+    addStyle("reward", 3);
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 2);
+    addBroker("三菱UFJ eスマート証券", 1);
   }
-  if (focus === "products") {
-    results.find((r) => r.name === "SBI証券")!.score += 3;
-    results.find((r) => r.name === "マネックス証券")!.score += 3;
-    results.find((r) => r.name === "楽天証券")!.score += 1;
+  if (startStyle === "balanced") {
+    addStyle("balanced", 3);
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 2);
+    addBroker("松井証券", 1);
+  }
+  if (startStyle === "expand") {
+    addStyle("expansion", 3);
+    addBroker("SBI証券", 2);
+    addBroker("マネックス証券", 2);
   }
 
-  // 米国株
-  if (usStocks === "yes") {
-    results.find((r) => r.name === "マネックス証券")!.score += 3;
-    results.find((r) => r.name === "SBI証券")!.score += 2;
-    results.find((r) => r.name === "楽天証券")!.score += 2;
-  } else if (usStocks === "no") {
-    results.find((r) => r.name === "松井証券")!.score += 1;
-    results.find((r) => r.name === "三菱UFJ eスマート証券")!.score += 1;
+  // 質問2
+  if (priority === "ease") {
+    addStyle("careful", 1);
+    addStyle("simple", 2);
+    addBroker("松井証券", 3);
+    addBroker("楽天証券", 2);
+  }
+  if (priority === "points") {
+    addStyle("reward", 3);
+    addBroker("SBI証券", 3);
+    addBroker("楽天証券", 3);
+    addBroker("三菱UFJ eスマート証券", 2);
+  }
+  if (priority === "balance") {
+    addStyle("balanced", 3);
+    addBroker("SBI証券", 3);
+    addBroker("楽天証券", 2);
+    addBroker("松井証券", 1);
+  }
+  if (priority === "products") {
+    addStyle("expansion", 3);
+    addBroker("SBI証券", 2);
+    addBroker("マネックス証券", 3);
   }
 
-  // クレカ積立
-  if (creditCard === "yes") {
-    results.find((r) => r.name === "SBI証券")!.score += 3;
-    results.find((r) => r.name === "楽天証券")!.score += 3;
-    results.find((r) => r.name === "三菱UFJ eスマート証券")!.score += 2;
-  } else if (creditCard === "no") {
-    results.find((r) => r.name === "松井証券")!.score += 1;
-    results.find((r) => r.name === "マネックス証券")!.score += 1;
+  // 質問3
+  if (continuity === "simple") {
+    addStyle("simple", 3);
+    addBroker("松井証券", 2);
+    addBroker("三菱UFJ eスマート証券", 1);
+    addBroker("楽天証券", 1);
+  }
+  if (continuity === "benefit") {
+    addStyle("reward", 3);
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 2);
+    addBroker("三菱UFJ eスマート証券", 1);
+  }
+  if (continuity === "stable") {
+    addStyle("balanced", 3);
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 2);
+    addBroker("松井証券", 1);
+  }
+  if (continuity === "expandable") {
+    addStyle("expansion", 3);
+    addBroker("SBI証券", 2);
+    addBroker("マネックス証券", 2);
   }
 
-  // 毎月の積立額
-  if (monthly === "small") {
-    results.find((r) => r.name === "松井証券")!.score += 2;
-    results.find((r) => r.name === "三菱UFJ eスマート証券")!.score += 2;
-    results.find((r) => r.name === "楽天証券")!.score += 1;
+  // 質問4
+  if (complexity === "simple") {
+    addStyle("simple", 2);
+    addStyle("careful", 1);
+    addBroker("松井証券", 2);
+    addBroker("楽天証券", 1);
   }
-  if (monthly === "mid") {
-    results.find((r) => r.name === "SBI証券")!.score += 2;
-    results.find((r) => r.name === "楽天証券")!.score += 2;
-    results.find((r) => r.name === "三菱UFJ eスマート証券")!.score += 1;
+  if (complexity === "benefit") {
+    addStyle("reward", 2);
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 1);
+    addBroker("三菱UFJ eスマート証券", 1);
   }
-  if (monthly === "large") {
-    results.find((r) => r.name === "SBI証券")!.score += 2;
-    results.find((r) => r.name === "マネックス証券")!.score += 2;
+  if (complexity === "middle") {
+    addStyle("balanced", 2);
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 1);
+    addBroker("松井証券", 1);
+  }
+  if (complexity === "many") {
+    addStyle("expansion", 2);
+    addBroker("SBI証券", 1);
+    addBroker("マネックス証券", 2);
   }
 
-  // 理由文
-  results.forEach((item) => {
+  // 質問5
+  if (futureView === "continue") {
+    addStyle("simple", 2);
+    addStyle("careful", 1);
+    addBroker("松井証券", 2);
+    addBroker("楽天証券", 1);
+    addBroker("三菱UFJ eスマート証券", 1);
+  }
+  if (futureView === "reward") {
+    addStyle("reward", 2);
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 2);
+    addBroker("三菱UFJ eスマート証券", 1);
+  }
+  if (futureView === "balance") {
+    addStyle("balanced", 2);
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 2);
+  }
+  if (futureView === "global") {
+    addStyle("expansion", 2);
+    addBroker("マネックス証券", 3);
+    addBroker("SBI証券", 2);
+    addBroker("楽天証券", 1);
+  }
+
+  const dominantStyle = (Object.entries(styleScores).sort(
+    (a, b) => b[1] - a[1]
+  )[0]?.[0] ?? "balanced") as StyleKey;
+
+  const styleInfo = styleMaster[dominantStyle];
+
+  brokers.forEach((item) => {
     if (item.name === "SBI証券") {
       item.reason =
-        "クレカ積立・ポイント・商品ラインナップの総合力を重視する人向けの候補です。";
+        "総合力、クレカ積立、商品ラインナップを広く見たい人と相性が良い候補です。";
     }
     if (item.name === "楽天証券") {
       item.reason =
-        "ポイント活用やNISA利用のしやすさを重視する人向けの候補です。";
+        "ポイント活用やNISAの始めやすさを重視したい人と相性が良い候補です。";
     }
     if (item.name === "マネックス証券") {
       item.reason =
-        "米国株や商品ラインナップを重視する人向けの候補です。";
+        "米国株や商品ラインナップの広さまで視野に入れたい人向けの候補です。";
     }
     if (item.name === "三菱UFJ eスマート証券") {
       item.reason =
-        "au / Ponta 経済圏や少額積立との相性を重視する人向けの候補です。";
+        "経済圏との相性や少額積立のしやすさを重視する人向けの候補です。";
     }
     if (item.name === "松井証券") {
       item.reason =
-        "初心者の始めやすさやシンプルな使いやすさを重視する人向けの候補です。";
+        "わかりやすさや始めやすさを重視して、無理なく続けたい人向けの候補です。";
     }
   });
 
-  const sortedResults = [...results].sort((a, b) => b.score - a.score);
+  const sortedResults = [...brokers].sort((a, b) => b.score - a.score).slice(0, 3);
 
   const answerSummary = [
-    { label: "投資経験", value: mapExperience(experience) },
-    { label: "重視するもの", value: mapFocus(focus) },
-    { label: "米国株利用", value: mapYesNo(usStocks) },
-    { label: "クレカ積立", value: mapYesNo(creditCard) },
-    { label: "毎月の積立額", value: mapMonthly(monthly) },
+    { label: "始めるときの気持ち", value: mapStartStyle(startStyle) },
+    { label: "一番気になること", value: mapPriority(priority) },
+    { label: "続けるうえで重要なこと", value: mapContinuity(continuity) },
+    { label: "情報量への感じ方", value: mapComplexity(complexity) },
+    { label: "NISAの先の考え方", value: mapFutureView(futureView) },
   ];
 
   return (
@@ -229,32 +334,50 @@ export default async function ResultPage({ searchParams }: ResultPageProps) {
       </header>
 
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10">
-          <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8 md:p-10">
-            <p className="mb-3 text-sm font-semibold tracking-wide text-blue-700">
-              診断結果
-            </p>
+        <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:gap-10">
+          <div className="space-y-5">
+            <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8 md:p-10">
+              <p className="mb-3 text-sm font-semibold tracking-wide text-blue-700">
+                診断結果
+              </p>
 
-            <h1 className="mb-5 text-4xl font-bold leading-[1.15] tracking-tight text-slate-950 sm:text-5xl">
-              あなたに合いそうな
-              <br />
-              <span className="whitespace-nowrap">証券口座候補</span>
-            </h1>
+              <h1 className="mb-3 text-4xl font-bold leading-[1.15] tracking-tight text-slate-950 sm:text-5xl">
+                あなたは
+                <br />
+                <span className="whitespace-nowrap">{styleInfo.title}</span>
+                です
+              </h1>
 
-            <p className="mb-6 text-base leading-8 text-slate-600 sm:text-lg">
-              回答内容をもとに、条件に合いやすい候補を整理して表示しています。
-              まずは上位候補の特徴を確認し、その後に詳細ページと公式サイトをご覧ください。
-            </p>
+              <p className="text-base leading-8 text-slate-600 sm:text-lg">
+                {styleInfo.description}
+              </p>
 
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-              <p className="mb-3 text-sm font-semibold text-slate-950">
+              <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                <p className="mb-3 text-sm font-semibold text-slate-950">
+                  このタイプが重視したいポイント
+                </p>
+                <div className="flex flex-wrap gap-2.5">
+                  {styleInfo.points.map((point) => (
+                    <span
+                      key={point}
+                      className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700"
+                    >
+                      {point}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
+              <p className="mb-3 text-sm font-semibold text-blue-700">
                 あなたの回答
               </p>
               <div className="grid gap-3 sm:grid-cols-2">
                 {answerSummary.map((item) => (
                   <div
                     key={item.label}
-                    className="rounded-xl border border-slate-200 bg-white px-4 py-3"
+                    className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3"
                   >
                     <p className="text-xs font-semibold text-slate-500">
                       {item.label}
@@ -265,18 +388,7 @@ export default async function ResultPage({ searchParams }: ResultPageProps) {
                   </div>
                 ))}
               </div>
-            </div>
-
-            <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5">
-              <p className="mb-2 text-sm font-semibold text-slate-950">
-                結果の見方
-              </p>
-              <ul className="space-y-2 text-sm leading-6 text-slate-600">
-                <li>・ 上位ほど、現在の回答条件と相性が良い候補です。</li>
-                <li>・ 結果は候補整理の参考情報であり、最終判断は公式情報をご確認ください。</li>
-                <li>・ 気になる候補は詳細ページで違いを比べてください。</li>
-              </ul>
-            </div>
+            </section>
           </div>
 
           <div className="space-y-5">
@@ -302,7 +414,7 @@ export default async function ResultPage({ searchParams }: ResultPageProps) {
                     </span>
                     {index === 0 && (
                       <span className="inline-flex rounded-full bg-slate-950 px-3 py-1 text-xs font-semibold text-white">
-                        最有力候補
+                        相性が良い候補
                       </span>
                     )}
                   </div>
@@ -347,14 +459,14 @@ export default async function ResultPage({ searchParams }: ResultPageProps) {
                     詳細を見る
                   </a>
 
-<a
-  href={item.officialUrl}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="rounded-xl border border-slate-300 bg-white px-6 py-3 text-center font-medium text-slate-700 transition hover:bg-slate-100"
->
-  公式サイトを見る
-</a>
+                  <a
+                    href={item.officialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-xl border border-slate-300 bg-white px-6 py-3 text-center font-medium text-slate-700 transition hover:bg-slate-100"
+                  >
+                    公式サイトを見る
+                  </a>
                 </div>
               </section>
             ))}
@@ -411,29 +523,42 @@ export default async function ResultPage({ searchParams }: ResultPageProps) {
   );
 }
 
-function mapExperience(value: string) {
-  if (value === "beginner") return "これから始める";
-  if (value === "some") return "少し経験がある";
-  if (value === "advanced") return "慣れている";
+function mapStartStyle(value: string) {
+  if (value === "safe") return "まずは失敗しにくく始めたい";
+  if (value === "reward") return "せっかくならお得さも重視したい";
+  if (value === "balanced") return "バランスよく選びたい";
+  if (value === "expand") return "将来の選択肢の広さも見たい";
   return "未選択";
 }
 
-function mapFocus(value: string) {
-  if (value === "points") return "ポイント還元";
+function mapPriority(value: string) {
   if (value === "ease") return "使いやすさ";
+  if (value === "points") return "ポイントや還元";
+  if (value === "balance") return "総合力";
   if (value === "products") return "商品ラインナップ";
   return "未選択";
 }
 
-function mapYesNo(value: string) {
-  if (value === "yes") return "はい";
-  if (value === "no") return "いいえ";
+function mapContinuity(value: string) {
+  if (value === "simple") return "手間が少ないこと";
+  if (value === "benefit") return "還元やメリットがあること";
+  if (value === "stable") return "無難でバランスが良いこと";
+  if (value === "expandable") return "今後の拡張性があること";
   return "未選択";
 }
 
-function mapMonthly(value: string) {
-  if (value === "small") return "1万円未満";
-  if (value === "mid") return "1〜5万円";
-  if (value === "large") return "5万円超";
+function mapComplexity(value: string) {
+  if (value === "simple") return "できるだけシンプルな方がいい";
+  if (value === "benefit") return "多少多くてもメリットがあるならOK";
+  if (value === "middle") return "バランス次第";
+  if (value === "many") return "多機能でも問題ない";
+  return "未選択";
+}
+
+function mapFutureView(value: string) {
+  if (value === "continue") return "まずは積立を無理なく続けたい";
+  if (value === "reward") return "お得さを活かして続けたい";
+  if (value === "balance") return "長く使える無難な口座がいい";
+  if (value === "global") return "米国株なども視野に入れたい";
   return "未選択";
 }

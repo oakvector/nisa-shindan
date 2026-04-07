@@ -39,21 +39,24 @@ export default function Home() {
     "候補を絞ってから公式サイトを見たい",
   ];
 
-  const steps = [
+  const diagnosisCards = [
     {
-      step: "STEP 1",
-      title: "5つの質問に答える",
-      text: "投資経験や重視する条件を選びます。",
+      title: "あなたの資産形成スタイル診断",
+      text: "考え方や続けやすさの感覚から、相性の良い候補を整理するメイン診断です。",
+      href: "/shindan/style",
+      status: "公開中",
     },
     {
-      step: "STEP 2",
-      title: "候補を確認する",
-      text: "条件に合う証券口座候補を順位つきで表示します。",
+      title: "NISAで失敗しにくい口座タイプ診断",
+      text: "始めやすさや迷いにくさの観点から、自分に合う口座タイプを探す診断です。",
+      href: "/shindan",
+      status: "準備中",
     },
     {
-      step: "STEP 3",
-      title: "詳細を比較して公式サイトへ",
-      text: "各候補の特徴を見たうえで、公式サイトを確認します。",
+      title: "続けやすい投資スタイル診断",
+      text: "無理なく続けやすい投資の始め方から、相性の良い候補を整理する診断です。",
+      href: "/shindan",
+      status: "準備中",
     },
   ];
 
@@ -69,7 +72,7 @@ export default function Home() {
 
           <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
             <a href="/shindan" className="transition hover:text-slate-900">
-              診断する
+              診断一覧
             </a>
             <a href="/how-it-works" className="transition hover:text-slate-900">
               使い方
@@ -89,14 +92,14 @@ export default function Home() {
             </p>
 
             <h1 className="mb-5 text-4xl font-bold leading-[1.15] tracking-tight text-slate-950 sm:text-5xl">
-              5問でわかる
+              複数の診断からわかる
               <br />
-              <span className="whitespace-nowrap">NISA向け証券口座診断</span>
+              <span className="whitespace-nowrap">あなたに合う証券口座の選び方</span>
             </h1>
 
             <p className="mb-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-              クレカ積立、ポイント還元、使いやすさ、米国株対応などの観点から、
-              あなたに合う証券口座候補を整理しやすくする診断サイトです。
+              クレカ積立、ポイント還元、使いやすさ、米国株対応などの比較軸をもとに、
+              複数の切り口から自分に合う証券口座候補を整理しやすくする診断サイトです。
             </p>
 
             <div className="mb-3 flex flex-col gap-3 sm:flex-row">
@@ -104,25 +107,25 @@ export default function Home() {
                 href="/shindan"
                 className="rounded-xl bg-slate-950 px-6 py-3 text-center font-medium text-white transition hover:opacity-90"
               >
-                診断をはじめる
+                診断一覧を見る
               </a>
 
               <a
-                href="/how-it-works"
+                href="/shindan/style"
                 className="rounded-xl border border-slate-300 bg-white px-6 py-3 text-center font-medium text-slate-700 transition hover:bg-slate-100"
               >
-                このサイトの使い方
+                メイン診断をはじめる
               </a>
             </div>
 
             <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
-              <span>5問・30秒で完了</span>
+              <span>複数診断に対応</span>
               <span>無料</span>
               <span>会員登録不要</span>
             </div>
 
             <div className="mb-5 flex flex-wrap gap-2.5">
-              {["クレカ積立", "ポイント還元", "初心者向け", "米国株対応", "少額積立"].map(
+              {["資産形成スタイル", "クレカ積立", "ポイント還元", "初心者向け", "米国株対応"].map(
                 (tag) => (
                   <span
                     key={tag}
@@ -136,10 +139,10 @@ export default function Home() {
 
             <div className="flex flex-wrap gap-4 text-sm">
               <a
-                href="/how-it-works"
+                href="/shindan"
                 className="font-medium text-blue-700 hover:underline"
               >
-                診断結果の見方を見る
+                診断一覧を見る
               </a>
               <a
                 href="/about"
@@ -156,7 +159,7 @@ export default function Home() {
                 このサイトでできること
               </p>
               <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-                比較・診断
+                複数診断対応
               </span>
             </div>
 
@@ -167,11 +170,11 @@ export default function Home() {
                     1
                   </span>
                   <p className="text-sm font-semibold text-slate-950">
-                    5つの質問で候補を絞る
+                    切り口の違う診断から選べる
                   </p>
                 </div>
                 <p className="text-sm leading-6 text-slate-600">
-                  投資経験や重視したい条件から、証券口座候補を整理します。
+                  初心者向け、失敗しにくさ、続けやすさなど、複数の考え方から診断できます。
                 </p>
               </div>
 
@@ -181,11 +184,11 @@ export default function Home() {
                     2
                   </span>
                   <p className="text-sm font-semibold text-slate-950">
-                    候補の違いを比較する
+                    自分のタイプを先に整理できる
                   </p>
                 </div>
                 <p className="text-sm leading-6 text-slate-600">
-                  使いやすさやクレカ積立対応など、比較しやすい形で特徴を見られます。
+                  いきなり証券会社を選ぶ前に、自分の資産形成スタイルから整理しやすくします。
                 </p>
               </div>
 
@@ -199,28 +202,72 @@ export default function Home() {
                   </p>
                 </div>
                 <p className="text-sm leading-6 text-slate-600">
-                  いきなり各社サイトを見る前に、自分に合う候補を把握しやすくします。
+                  候補を絞ってから詳細や公式サイトを確認しやすくします。
                 </p>
               </div>
             </div>
 
             <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-4">
               <p className="mb-2 text-sm font-semibold text-slate-950">
-                向いている人
+                まず公開中の診断
               </p>
               <div className="flex flex-wrap gap-2">
-                {["NISA初心者", "比較したい人", "クレカ積立重視", "候補を絞りたい人"].map(
-                  (item) => (
-                    <span
-                      key={item}
-                      className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700"
-                    >
-                      {item}
-                    </span>
-                  )
-                )}
+                <span className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700">
+                  資産形成スタイル診断
+                </span>
+                <span className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700">
+                  5社比較対応
+                </span>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 sm:pb-20">
+        <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
+          <div className="mb-6 flex flex-col gap-2">
+            <p className="text-sm font-semibold text-blue-700">公開中・準備中の診断</p>
+            <h2 className="text-2xl font-bold text-slate-950">
+              診断テーマを選ぶ
+            </h2>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-3">
+            {diagnosisCards.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+              >
+                <div className="mb-3">
+                  <span
+                    className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
+                      item.status === "公開中"
+                        ? "bg-blue-50 text-blue-700"
+                        : "bg-slate-200 text-slate-600"
+                    }`}
+                  >
+                    {item.status}
+                  </span>
+                </div>
+
+                <h3 className="mb-2 font-semibold text-slate-950">{item.title}</h3>
+                <p className="mb-5 text-sm leading-6 text-slate-600">{item.text}</p>
+
+                {item.status === "公開中" ? (
+                  <a
+                    href={item.href}
+                    className="inline-flex rounded-xl bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
+                  >
+                    この診断をはじめる
+                  </a>
+                ) : (
+                  <span className="inline-flex rounded-xl bg-slate-200 px-5 py-3 text-sm font-medium text-slate-500">
+                    準備中
+                  </span>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -274,22 +321,45 @@ export default function Home() {
           <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
             <p className="mb-2 text-sm font-semibold text-blue-700">診断の流れ</p>
             <h2 className="mb-5 text-2xl font-bold text-slate-950">
-              3ステップで使えます
+              まずは一覧から選べます
             </h2>
 
             <div className="space-y-4">
-              {steps.map((item) => (
-                <div
-                  key={item.step}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
-                >
-                  <p className="mb-1 text-sm font-semibold text-blue-700">
-                    {item.step}
-                  </p>
-                  <p className="font-semibold text-slate-950">{item.title}</p>
-                  <p className="mt-1 text-sm leading-6 text-slate-600">{item.text}</p>
-                </div>
-              ))}
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <p className="mb-1 text-sm font-semibold text-blue-700">
+                  STEP 1
+                </p>
+                <p className="font-semibold text-slate-950">
+                  診断テーマを選ぶ
+                </p>
+                <p className="mt-1 text-sm leading-6 text-slate-600">
+                  自分に近い切り口の診断を一覧から選びます。
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <p className="mb-1 text-sm font-semibold text-blue-700">
+                  STEP 2
+                </p>
+                <p className="font-semibold text-slate-950">
+                  質問に答える
+                </p>
+                <p className="mt-1 text-sm leading-6 text-slate-600">
+                  診断テーマごとの質問に答えて、自分のタイプを整理します。
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <p className="mb-1 text-sm font-semibold text-blue-700">
+                  STEP 3
+                </p>
+                <p className="font-semibold text-slate-950">
+                  候補を比較して公式サイトへ
+                </p>
+                <p className="mt-1 text-sm leading-6 text-slate-600">
+                  タイプ結果と候補を見たうえで、詳細ページや公式サイトを確認します。
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -327,16 +397,10 @@ export default function Home() {
             <a href="/privacy" className="hover:text-slate-900 hover:underline">
               Privacy
             </a>
-            <a
-              href="/disclosure"
-              className="hover:text-slate-900 hover:underline"
-            >
+            <a href="/disclosure" className="hover:text-slate-900 hover:underline">
               Disclosure
             </a>
-            <a
-              href="/how-it-works"
-              className="hover:text-slate-900 hover:underline"
-            >
+            <a href="/how-it-works" className="hover:text-slate-900 hover:underline">
               How it works
             </a>
           </div>
