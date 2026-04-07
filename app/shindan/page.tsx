@@ -3,24 +3,27 @@ export default function ShindanIndexPage() {
     {
       title: "あなたの資産形成スタイル診断",
       description:
-        "5つの質問から、あなたに合う証券口座の選び方を整理するメイン診断です。",
+        "自分がどんな考え方で口座を選ぶと納得しやすいかを整理する、いちばん基本の診断です。",
       href: "/shindan/style",
       status: "公開中",
+      tag: "基本診断",
     },
-{
-  title: "NISAで失敗しにくい口座タイプ診断",
-  description:
-    "失敗しにくさや始めやすさの観点から、自分に合う口座タイプを探す診断です。",
-  href: "/shindan/failure-safe",
-  status: "公開中",
-},
-{
-  title: "あなたに合う続けやすい投資スタイル診断",
-  description:
-    "無理なく続けやすい積立スタイルから、相性の良い候補を整理する診断です。",
-  href: "/shindan/continue-style",
-  status: "公開中",
-},
+    {
+      title: "NISAで失敗しにくい口座タイプ診断",
+      description:
+        "避けたい失敗や不安から、自分に合う口座タイプを探す診断です。",
+      href: "/shindan/failure-safe",
+      status: "公開中",
+      tag: "失敗回避",
+    },
+    {
+      title: "あなたに合う続けやすい投資スタイル診断",
+      description:
+        "無理なく続けやすい投資の形から、相性の良い候補を整理する診断です。",
+      href: "/shindan/continue-style",
+      status: "公開中",
+      tag: "継続重視",
+    },
   ];
 
   return (
@@ -60,9 +63,9 @@ export default function ShindanIndexPage() {
           </h1>
 
           <p className="max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
-            このサイトでは、証券口座選びをひとつの軸だけで決めないために、
-            複数の考え方から診断できる形を目指しています。
-            まずは自分に近いテーマの診断を選んでください。
+            このサイトでは、証券口座選びをひとつの基準だけで決めないために、
+            3つの違う切り口から診断できる形にしています。
+            まずは今の自分にいちばん近いテーマを選んでください。
           </p>
         </div>
       </section>
@@ -74,9 +77,12 @@ export default function ShindanIndexPage() {
               key={item.title}
               className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8"
             >
-              <div className="mb-4 flex items-center justify-between gap-3">
+              <div className="mb-4 flex items-center gap-3">
                 <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
                   {item.status}
+                </span>
+                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+                  {item.tag}
                 </span>
               </div>
 
@@ -88,20 +94,48 @@ export default function ShindanIndexPage() {
                 {item.description}
               </p>
 
-              {item.href === "#" ? (
-                <span className="inline-flex rounded-xl bg-slate-200 px-6 py-3 text-sm font-medium text-slate-500">
-                  準備中
-                </span>
-              ) : (
-                <a
-                  href={item.href}
-                  className="inline-flex rounded-xl bg-slate-950 px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
-                >
-                  この診断をはじめる
-                </a>
-              )}
+              <a
+                href={item.href}
+                className="inline-flex rounded-xl bg-slate-950 px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
+              >
+                この診断をはじめる
+              </a>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20">
+        <div className="grid gap-6 lg:grid-cols-3">
+          <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
+            <p className="mb-2 text-sm font-semibold text-blue-700">1本目</p>
+            <h2 className="mb-4 text-2xl font-bold text-slate-950">
+              自分のタイプを知りたい人向け
+            </h2>
+            <p className="text-sm leading-7 text-slate-600 sm:text-base">
+              まずは広く、自分がどんな基準で口座を選ぶと納得しやすいかを知りたい人に向いています。
+            </p>
+          </div>
+
+          <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
+            <p className="mb-2 text-sm font-semibold text-blue-700">2本目</p>
+            <h2 className="mb-4 text-2xl font-bold text-slate-950">
+              後悔や失敗を減らしたい人向け
+            </h2>
+            <p className="text-sm leading-7 text-slate-600 sm:text-base">
+              口座選びで何を避けたいかがはっきりしている人は、この切り口から選ぶと整理しやすいです。
+            </p>
+          </div>
+
+          <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
+            <p className="mb-2 text-sm font-semibold text-blue-700">3本目</p>
+            <h2 className="mb-4 text-2xl font-bold text-slate-950">
+              無理なく続けたい人向け
+            </h2>
+            <p className="text-sm leading-7 text-slate-600 sm:text-base">
+              続けられるかどうかを一番大事にしたい人は、この診断から入ると相性が見えやすいです。
+            </p>
+          </div>
         </div>
       </section>
 
