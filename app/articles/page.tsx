@@ -1,5 +1,20 @@
+"use client";
+
+import { useMemo, useState } from "react";
+
+type Article = {
+  title: string;
+  description: string;
+  href: string;
+  tag: "比較記事" | "選び方ガイド" | "単独理解";
+};
+
+type FilterKey = "all" | "comparison" | "guide" | "broker";
+
 export default function ArticlesPage() {
-  const featured = [
+  const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
+
+  const featured: Article[] = [
     {
       title: "SBI証券と楽天証券の違いは？",
       description:
@@ -23,37 +38,62 @@ export default function ArticlesPage() {
     },
   ];
 
-  const brokerArticles = [
+  const brokerArticles: Article[] = [
     {
       title: "SBI証券はどんな人に向いている？",
       description:
         "SBI証券が向いている人の特徴や、他社も比較した方がよいケースを整理した記事です。",
       href: "/articles/sbi-for-who",
+      tag: "単独理解",
     },
     {
       title: "楽天証券はどんな人に向いている？",
       description:
         "楽天証券が向いている人の特徴や、他社も比較した方がよいケースを整理した記事です。",
       href: "/articles/rakuten-for-who",
+      tag: "単独理解",
     },
     {
       title: "松井証券は初心者向きか？",
       description:
         "松井証券が初心者向きと言われる理由と、他社も比較した方がよい人を整理した記事です。",
       href: "/articles/matsui-for-beginners",
+      tag: "単独理解",
     },
     {
       title: "マネックス証券はどんな人に向いている？",
       description:
         "マネックス証券と相性が良い人の特徴や、他社も比較した方がよいケースを整理した記事です。",
       href: "/articles/monex-for-who",
+      tag: "単独理解",
     },
     {
       title: "三菱UFJ eスマート証券はどんな人に向いている？",
       description:
         "三菱UFJ eスマート証券が向いている人の特徴や、他社も比較した方がよいケースを整理した記事です。",
       href: "/articles/musmart-for-who",
+      tag: "単独理解",
     },
+  ];
+
+  const allArticles = [...featured, ...brokerArticles];
+
+  const filteredArticles = useMemo(() => {
+    if (activeFilter === "all") return allArticles;
+    if (activeFilter === "comparison") {
+      return allArticles.filter((article) => article.tag === "比較記事");
+    }
+    if (activeFilter === "guide") {
+      return allArticles.filter((article) => article.tag === "選び方ガイド");
+    }
+    return allArticles.filter((article) => article.tag === "単独理解");
+  }, [activeFilter]);
+
+  const filterButtons: { key: FilterKey; label: string }[] = [
+    { key: "all", label: "すべて" },
+    { key: "comparison", label: "比較記事" },
+    { key: "guide", label: "選び方ガイド" },
+    { key: "broker", label: "単独理解" },
   ];
 
   return (
@@ -116,7 +156,7 @@ export default function ArticlesPage() {
           <div className="mb-5 flex flex-col gap-2">
             <p className="text-sm font-semibold text-blue-700">まず読みたい記事</p>
             <h2 className="text-2xl font-bold text-slate-950">
-              比較・選び方の入口
+              比較と選び方の入口
             </h2>
           </div>
 
@@ -152,18 +192,60 @@ export default function ArticlesPage() {
 
         <section className="mt-10">
           <div className="mb-5 flex flex-col gap-2">
-            <p className="text-sm font-semibold text-blue-700">各社を知る</p>
+            <p className="text-sm font-semibold text-blue-700">探しやすくする</p>
             <h2 className="text-2xl font-bold text-slate-950">
-              証券会社ごとの解説記事
+              カテゴリで絞り込む
             </h2>
+            <p className="text-sm leading-7 text-slate-600 sm:text-base">
+              比較記事だけ見たい人、各社の解説だけ読みたい人向けに、カテゴリごとに絞り込めます。
+            </p>
+          </div>
+
+          <div className="mb-6 flex flex-wrap gap-3">
+            {filterButtons.map((button) => {
+              const isActive = activeFilter === button.key;
+              return (
+                <button
+                  key={button.key}
+                  type="button"
+                  onClick={() => setActiveFilter(button.key)}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                    isActive
+                      ? "bg-slate-950 text-white"
+                      : "border border-slate-300 bg-white text-slate-700 hover:bg-slate-100"
+                  }`}
+                >
+                  {button.label}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-4">
+            <p className="text-sm leading-6 text-slate-600">
+              {activeFilter === "all" &&
+                "全体を見ながら、自分に合いそうな入口を探したい人向けです。"}
+              {activeFilter === "comparison" &&
+                "複数社の違いを先に整理したい人向けです。"}
+              {activeFilter === "guide" &&
+                "まずは選び方の考え方から知りたい人向けです。"}
+              {activeFilter === "broker" &&
+                "気になる会社がすでにある人向けです。"}
+            </p>
           </div>
 
           <div className="grid gap-4 lg:grid-cols-2">
-            {brokerArticles.map((item) => (
+            {filteredArticles.map((item) => (
               <div
                 key={item.title}
                 className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
               >
+                <div className="mb-3">
+                  <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                    {item.tag}
+                  </span>
+                </div>
+
                 <h3 className="mb-2 text-lg font-semibold text-slate-950">
                   {item.title}
                 </h3>

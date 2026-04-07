@@ -1,3 +1,5 @@
+import RelatedArticles from "@/components/RelatedArticles";
+
 export default function MatsuiForBeginnersPage() {
   const merits = [
     {

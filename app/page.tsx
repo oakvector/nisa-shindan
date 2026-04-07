@@ -60,6 +60,27 @@ export default function Home() {
     },
   ];
 
+  const featuredArticles = [
+    {
+      title: "SBI証券と楽天証券の違いは？",
+      text: "迷いやすい2社の違いを、初心者向けにシンプルに整理した比較記事です。",
+      href: "/articles/sbi-vs-rakuten",
+      tag: "比較記事",
+    },
+    {
+      title: "NISA初心者に向いている証券口座の選び方",
+      text: "初心者が見落としやすいポイントを整理しながら、選び方の考え方をまとめた記事です。",
+      href: "/articles/nisa-beginner-choice",
+      tag: "選び方ガイド",
+    },
+    {
+      title: "クレカ積立を重視する人の証券口座比較",
+      text: "クレカ積立やポイント還元を重視する人向けの比較記事です。",
+      href: "/articles/credit-card-tsumitate",
+      tag: "比較記事",
+    },
+  ];
+
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 backdrop-blur">
@@ -69,6 +90,7 @@ export default function Home() {
               NISA向け証券口座診断
             </p>
           </a>
+
           <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
             <a href="/shindan" className="transition hover:text-slate-900">
               診断一覧
@@ -87,22 +109,21 @@ export default function Home() {
       </header>
 
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
-        <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
+        <div className="grid gap-8 lg:grid-cols-[1.12fr_0.88fr] lg:gap-10">
           <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8 md:p-10">
             <p className="mb-4 text-sm font-semibold tracking-wide text-blue-700">
               NISA・証券口座選びをシンプルに
             </p>
 
             <h1 className="mb-5 text-4xl font-bold leading-[1.15] tracking-tight text-slate-950 sm:text-5xl">
-              3つの診断からわかる
+              診断と記事からわかる
               <br />
               <span className="whitespace-nowrap">あなたに合う証券口座の選び方</span>
             </h1>
 
             <p className="mb-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-              「自分のタイプ」「失敗しにくさ」「続けやすさ」の3つの切り口から、
-              あなたに合う証券口座候補を整理しやすくする診断サイトです。
-              いきなり証券会社を決める前に、まず自分に合う選び方を見つけられます。
+              3つの診断で自分のタイプを整理しながら、比較記事や解説記事で違いも確認できるサイトです。
+              いきなり会社名だけで選ぶのではなく、まず自分に合う選び方を見つけられます。
             </p>
 
             <div className="mb-3 flex flex-col gap-3 sm:flex-row">
@@ -114,15 +135,16 @@ export default function Home() {
               </a>
 
               <a
-                href="/shindan/style"
+                href="/articles"
                 className="rounded-xl border border-slate-300 bg-white px-6 py-3 text-center font-medium text-slate-700 transition hover:bg-slate-100"
               >
-                まずは基本診断をやってみる
+                記事一覧を見る
               </a>
             </div>
 
             <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
               <span>公開中の診断 3本</span>
+              <span>記事 8本</span>
               <span>無料</span>
               <span>会員登録不要</span>
             </div>
@@ -132,8 +154,8 @@ export default function Home() {
                 "資産形成スタイル",
                 "失敗しにくさ",
                 "続けやすさ",
-                "ポイント還元",
-                "米国株対応",
+                "比較記事",
+                "各社の解説",
               ].map((tag) => (
                 <span
                   key={tag}
@@ -146,16 +168,16 @@ export default function Home() {
 
             <div className="flex flex-wrap gap-4 text-sm">
               <a
-                href="/shindan"
+                href="/shindan/style"
                 className="font-medium text-blue-700 hover:underline"
               >
-                3つの診断を見る
+                まずは基本診断をやってみる
               </a>
               <a
-                href="/about"
+                href="/articles/sbi-vs-rakuten"
                 className="font-medium text-slate-600 hover:text-slate-900 hover:underline"
               >
-                このサイトについて
+                人気の比較記事を見る
               </a>
             </div>
           </div>
@@ -166,7 +188,7 @@ export default function Home() {
                 このサイトでできること
               </p>
               <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-                3診断公開中
+                診断 + 記事
               </span>
             </div>
 
@@ -177,11 +199,11 @@ export default function Home() {
                     1
                   </span>
                   <p className="text-sm font-semibold text-slate-950">
-                    3つの切り口から選べる
+                    3つの診断から選べる
                   </p>
                 </div>
                 <p className="text-sm leading-6 text-slate-600">
-                  自分のタイプ、失敗しにくさ、続けやすさの3つの視点から診断できます。
+                  自分のタイプ、失敗しにくさ、続けやすさの3つの視点から整理できます。
                 </p>
               </div>
 
@@ -191,11 +213,11 @@ export default function Home() {
                     2
                   </span>
                   <p className="text-sm font-semibold text-slate-950">
-                    自分に合う選び方が先にわかる
+                    記事で違いも理解できる
                   </p>
                 </div>
                 <p className="text-sm leading-6 text-slate-600">
-                  いきなり会社名で選ぶ前に、自分がどんな基準で選ぶべきかを整理できます。
+                  比較記事や各社の解説記事を読んでから、診断に進むこともできます。
                 </p>
               </div>
 
@@ -209,20 +231,20 @@ export default function Home() {
                   </p>
                 </div>
                 <p className="text-sm leading-6 text-slate-600">
-                  診断結果で候補を絞ったあとに、詳細ページや公式サイトを確認しやすくします。
+                  診断結果や記事をもとに候補を絞ったうえで、詳細ページや公式サイトを確認できます。
                 </p>
               </div>
             </div>
 
             <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-4">
               <p className="mb-2 text-sm font-semibold text-slate-950">
-                いま公開中の診断
+                まず見たい入口
               </p>
               <div className="flex flex-wrap gap-2">
                 {[
-                  "資産形成スタイル診断",
-                  "失敗しにくい診断",
-                  "続けやすさ診断",
+                  "基本診断",
+                  "SBI vs 楽天",
+                  "初心者向けの選び方",
                 ].map((item) => (
                   <span
                     key={item}
@@ -272,60 +294,58 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
+
       <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 sm:pb-20">
         <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
           <div className="mb-6 flex flex-col gap-2">
-            <p className="text-sm font-semibold text-blue-700">比較記事</p>
+            <p className="text-sm font-semibold text-blue-700">まず読みたい記事</p>
             <h2 className="text-2xl font-bold text-slate-950">
-              記事から違いを整理する
+              比較と選び方の入口
             </h2>
-            <p className="text-sm leading-7 text-slate-600 sm:text-base">
-              診断だけでなく、証券口座の違いや選び方を整理した記事も読めます。
-              比較記事を読んでから診断に進むと、より判断しやすくなります。
-            </p>
           </div>
 
-          <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-              <p className="mb-2 text-sm font-semibold text-blue-700">公開中の記事</p>
-              <h3 className="mb-2 text-xl font-bold text-slate-950">
-                SBI証券と楽天証券の違いは？
-              </h3>
-              <p className="mb-5 text-sm leading-6 text-slate-600">
-                NISAを始めるときに迷いやすい2社の違いを、シンプルに整理した比較記事です。
-              </p>
-
-              <a
-                href="/articles/sbi-vs-rakuten"
-                className="inline-flex rounded-xl bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
+          <div className="grid gap-4 lg:grid-cols-3">
+            {featuredArticles.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
               >
-                記事を読む
-              </a>
-            </div>
+                <div className="mb-3">
+                  <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                    {item.tag}
+                  </span>
+                </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
-              <p className="mb-2 text-sm font-semibold text-slate-950">
-                まず見たいページ
-              </p>
-              <div className="space-y-3">
+                <h3 className="mb-2 font-semibold text-slate-950">{item.title}</h3>
+                <p className="mb-5 text-sm leading-6 text-slate-600">{item.text}</p>
+
                 <a
-                  href="/articles"
-                  className="block rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+                  href={item.href}
+                  className="inline-flex rounded-xl bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
                 >
-                  記事一覧を見る
-                </a>
-                <a
-                  href="/shindan"
-                  className="block rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
-                >
-                  診断一覧を見る
+                  記事を読む
                 </a>
               </div>
-            </div>
+            ))}
+          </div>
+
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="/articles"
+              className="rounded-xl bg-slate-950 px-6 py-3 text-center font-medium text-white transition hover:opacity-90"
+            >
+              記事一覧を見る
+            </a>
+            <a
+              href="/articles/rakuten-for-who"
+              className="rounded-xl border border-slate-300 bg-white px-6 py-3 text-center font-medium text-slate-700 transition hover:bg-slate-100"
+            >
+              各社の解説記事を見る
+            </a>
           </div>
         </div>
       </section>
+
       <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 sm:pb-20">
         <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
           <div className="mb-6 flex flex-col gap-2">
@@ -373,9 +393,9 @@ export default function Home() {
           </div>
 
           <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
-            <p className="mb-2 text-sm font-semibold text-blue-700">診断の流れ</p>
+            <p className="mb-2 text-sm font-semibold text-blue-700">おすすめの流れ</p>
             <h2 className="mb-5 text-2xl font-bold text-slate-950">
-              まずは3つの中から選べます
+              迷う人はこの順で見ると分かりやすいです
             </h2>
 
             <div className="space-y-4">
@@ -384,10 +404,10 @@ export default function Home() {
                   STEP 1
                 </p>
                 <p className="font-semibold text-slate-950">
-                  診断テーマを選ぶ
+                  記事で違いをざっくりつかむ
                 </p>
                 <p className="mt-1 text-sm leading-6 text-slate-600">
-                  自分に近い切り口の診断を一覧から選びます。
+                  比較記事や選び方ガイドで、まず全体像をつかみます。
                 </p>
               </div>
 
@@ -396,10 +416,10 @@ export default function Home() {
                   STEP 2
                 </p>
                 <p className="font-semibold text-slate-950">
-                  質問に答える
+                  診断で自分向けの候補を絞る
                 </p>
                 <p className="mt-1 text-sm leading-6 text-slate-600">
-                  それぞれの診断テーマに合った質問に答えて、自分のタイプを整理します。
+                  3つの診断から、自分に合う切り口でタイプを整理します。
                 </p>
               </div>
 
@@ -408,10 +428,10 @@ export default function Home() {
                   STEP 3
                 </p>
                 <p className="font-semibold text-slate-950">
-                  候補を比べて公式サイトへ
+                  詳細ページや公式サイトを確認する
                 </p>
                 <p className="mt-1 text-sm leading-6 text-slate-600">
-                  タイプ結果と候補を見たうえで、詳細ページや公式サイトを確認します。
+                  最後に候補を比べて、条件や最新情報を公式サイトで確認します。
                 </p>
               </div>
             </div>

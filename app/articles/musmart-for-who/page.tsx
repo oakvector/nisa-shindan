@@ -1,3 +1,5 @@
+import RelatedArticles from "@/components/RelatedArticles";
+
 export default function MusmartForWhoPage() {
   const strongPoints = [
     {
@@ -26,6 +28,30 @@ export default function MusmartForWhoPage() {
     {
       title: "自分の経済圏をあまり意識していない人",
       text: "三菱UFJ eスマート証券は、相性が合うと強みを感じやすいタイプです。普段使うポイントやお得さとのつながりを重視しない人は、他社の方が判断しやすいことがあります。",
+    },
+  ];
+
+    const relatedArticles = [
+    {
+      title: "クレカ積立を重視する人の証券口座比較",
+      description:
+        "クレカ積立やポイント還元を重視する人向けに、証券口座の見方を整理した比較記事です。",
+      href: "/articles/credit-card-tsumitate",
+      tag: "比較記事",
+    },
+    {
+      title: "楽天証券はどんな人に向いている？",
+      description:
+        "楽天証券が向いている人の特徴や、他社も比較した方がよいケースを整理した記事です。",
+      href: "/articles/rakuten-for-who",
+      tag: "単独理解",
+    },
+    {
+      title: "SBI証券はどんな人に向いている？",
+      description:
+        "SBI証券が向いている人の特徴や、他社も比較した方がよいケースを整理した記事です。",
+      href: "/articles/sbi-for-who",
+      tag: "単独理解",
     },
   ];
 
@@ -161,6 +187,8 @@ export default function MusmartForWhoPage() {
           </p>
         </section>
       </article>
+
+<RelatedArticles heading="お得さと続けやすさで比較したい人向けの関連記事" articles={relatedArticles} />
 
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
