@@ -1,4 +1,5 @@
 import RelatedArticles from "@/components/RelatedArticles";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function MatsuiForBeginnersPage() {
   const merits = [
@@ -31,6 +32,36 @@ export default function MatsuiForBeginnersPage() {
     },
   ];
 
+    const relatedArticles = [
+    {
+      title: "NISA初心者に向いている証券口座の選び方",
+      description:
+        "初心者が見落としやすいポイントを整理しながら、証券口座選びの考え方をまとめた記事です。",
+      href: "/articles/nisa-beginner-choice",
+      tag: "選び方ガイド",
+    },
+    {
+      title: "楽天証券はどんな人に向いている？",
+      description:
+        "楽天証券が向いている人の特徴や、他社も比較した方がよいケースを整理した記事です。",
+      href: "/articles/rakuten-for-who",
+      tag: "単独理解",
+    },
+    {
+      title: "SBI証券はどんな人に向いている？",
+      description:
+        "SBI証券が向いている人の特徴や、他社も比較した方がよいケースを整理した記事です。",
+      href: "/articles/sbi-for-who",
+      tag: "単独理解",
+    },
+  ];
+
+  const breadcrumbs = [
+  { label: "ホーム", href: "/" },
+  { label: "記事一覧", href: "/articles" },
+  { label: "松井証券は初心者向きか？" },
+];
+
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 backdrop-blur">
@@ -59,6 +90,7 @@ export default function MatsuiForBeginnersPage() {
       </header>
 
       <article className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+        <Breadcrumbs items={breadcrumbs} />
         <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8 md:p-10">
           <p className="mb-3 text-sm font-semibold tracking-wide text-blue-700">
             単独理解記事
@@ -161,6 +193,8 @@ export default function MatsuiForBeginnersPage() {
           </p>
         </section>
       </article>
+
+<RelatedArticles heading="初心者向けであわせて読みたい記事" articles={relatedArticles} />
 
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">

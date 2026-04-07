@@ -1,4 +1,5 @@
 import RelatedArticles from "@/components/RelatedArticles";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function CreditCardTsumitatePage() {
   const compareRows = [
@@ -67,6 +68,12 @@ export default function CreditCardTsumitatePage() {
     },
   ];
 
+  const breadcrumbs = [
+  { label: "ホーム", href: "/" },
+  { label: "記事一覧", href: "/articles" },
+  { label: "クレカ積立を重視する人の証券口座比較" },
+];
+
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 backdrop-blur">
@@ -95,6 +102,7 @@ export default function CreditCardTsumitatePage() {
       </header>
 
       <article className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+        <Breadcrumbs items={breadcrumbs} />
         <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8 md:p-10">
           <p className="mb-3 text-sm font-semibold tracking-wide text-blue-700">
             比較記事
