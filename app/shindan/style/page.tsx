@@ -4,15 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "資産形成スタイル診断 | NISA向け証券口座診断",
-  description:
-    "5つの質問から、あなたの資産形成スタイルに合う証券口座の選び方を整理する診断です。始めやすさ、お得さ、バランス、将来の広がりから候補を見つけやすくします。",
-  alternates: {
-    canonical: "/shindan/style",
-  },
-};
-
 export default function StyleShindanPage() {
   const router = useRouter();
 
