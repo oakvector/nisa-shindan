@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About | NISA向け証券口座診断",
+  description:
+    "NISA向け証券口座診断のサイト概要ページです。診断と比較記事を通して、証券口座選びをわかりやすく整理することを目的としています。",
+  alternates: {
+    canonical: "/about",
+  },
+};
+
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">

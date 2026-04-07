@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "使い方 | NISA向け証券口座診断",
+  description:
+    "このサイトの使い方をまとめています。3つの診断と比較記事をどう使い分けるか、診断から候補比較までの流れを確認できます。",
+  alternates: {
+    canonical: "/how-it-works",
+  },
+};
+
 export default function HowItWorksPage() {
   const diagnoses = [
     {
@@ -53,7 +64,7 @@ export default function HowItWorksPage() {
                 About
             </a>
             </nav>
-            
+
         </div>
       </header>
 

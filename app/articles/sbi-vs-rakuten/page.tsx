@@ -1,5 +1,15 @@
 import RelatedArticles from "@/components/RelatedArticles";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SBI証券と楽天証券の違いは？ | NISA向け証券口座診断",
+  description:
+    "SBI証券と楽天証券の違いを、NISA初心者向けにわかりやすく整理した比較記事です。使いやすさ、ポイント活用、選択肢の広さの違いを確認できます。",
+  alternates: {
+    canonical: "/articles/sbi-vs-rakuten",
+  },
+};
 
 export default function SbiVsRakutenPage() {
   const compareRows = [

@@ -1,5 +1,15 @@
 import RelatedArticles from "@/components/RelatedArticles";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NISA初心者に向いている証券口座の選び方 | NISA向け証券口座診断",
+  description:
+    "NISA初心者が証券口座を選ぶときに見落としやすいポイントを整理した記事です。使いやすさ、続けやすさ、お得さ、将来の広がりの考え方がわかります。",
+  alternates: {
+    canonical: "/articles/nisa-beginner-choice",
+  },
+};
 
 export default function NisaBeginnerChoicePage() {
   const points = [

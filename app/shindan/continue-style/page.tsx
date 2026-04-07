@@ -2,6 +2,16 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "続けやすい投資スタイル診断 | NISA向け証券口座診断",
+  description:
+    "無理なく続けやすい投資スタイルを5つの質問から整理する診断です。手間の少なさ、お得さ、安心感、将来の広がりから候補を見つけやすくします。",
+  alternates: {
+    canonical: "/shindan/continue-style",
+  },
+};
 
 export default function ContinueStyleShindanPage() {
   const router = useRouter();

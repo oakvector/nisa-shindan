@@ -1,5 +1,15 @@
 import RelatedArticles from "@/components/RelatedArticles";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "クレカ積立を重視する人の証券口座比較 | NISA向け証券口座診断",
+  description:
+    "クレカ積立やポイント還元を重視する人向けに、証券口座の選び方を整理した比較記事です。SBI証券、楽天証券、三菱UFJ eスマート証券の見方をまとめています。",
+  alternates: {
+    canonical: "/articles/credit-card-tsumitate",
+  },
+};
 
 export default function CreditCardTsumitatePage() {
   const compareRows = [

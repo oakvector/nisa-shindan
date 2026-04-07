@@ -1,4 +1,14 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SBI証券はどんな人に向いている？ | NISA向け証券口座診断",
+  description:
+    "SBI証券が向いている人の特徴を整理した記事です。総合力、選択肢の広さ、将来の広がりを重視する人向けの特徴がわかります。",
+  alternates: {
+    canonical: "/articles/sbi-for-who",
+  },
+};
 
 export default function SbiForWhoPage() {
   const strongPoints = [

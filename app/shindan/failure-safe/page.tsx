@@ -2,6 +2,16 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "失敗しにくい口座タイプ診断 | NISA向け証券口座診断",
+  description:
+    "NISAで失敗しにくい口座タイプを5つの質問から整理する診断です。避けたい失敗や不安から、自分に合う証券口座候補を見つけやすくします。",
+  alternates: {
+    canonical: "/shindan/failure-safe",
+  },
+};
 
 export default function FailureSafeShindanPage() {
   const router = useRouter();

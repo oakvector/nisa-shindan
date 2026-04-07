@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NISA向け証券口座診断 | 診断と比較記事で自分に合う選び方がわかる",
+  description:
+    "NISA向けの証券口座を、3つの診断と比較記事から整理できるサイトです。資産形成スタイル、失敗しにくさ、続けやすさの観点から自分に合う選び方を見つけられます。",
+  alternates: {
+    canonical: "/",
+  },
+};
+
 export default function Home() {
   const comparisonPoints = [
     {

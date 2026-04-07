@@ -1,5 +1,15 @@
 import RelatedArticles from "@/components/RelatedArticles";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "三菱UFJ eスマート証券はどんな人に向いている？ | NISA向け証券口座診断",
+  description:
+    "三菱UFJ eスマート証券が向いている人の特徴を整理した記事です。少額から始めたい人や、お得さと続けやすさのバランスを重視する人向けの特徴がわかります。",
+  alternates: {
+    canonical: "/articles/musmart-for-who",
+  },
+};
 
 export default function MusmartForWhoPage() {
   const strongPoints = [

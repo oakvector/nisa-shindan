@@ -2,6 +2,16 @@
 
 import { useMemo, useState } from "react";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "記事一覧 | NISA向け証券口座診断",
+  description:
+    "SBI証券と楽天証券の比較、NISA初心者向けの選び方、クレカ積立比較、各社の特徴解説など、証券口座選びに役立つ記事をまとめています。",
+  alternates: {
+    canonical: "/articles",
+  },
+};
 
 type Article = {
   title: string;
@@ -101,7 +111,7 @@ export default function ArticlesPage() {
     { label: "ホーム", href: "/" },
     { label: "記事一覧" },
   ];
-  
+
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 backdrop-blur">

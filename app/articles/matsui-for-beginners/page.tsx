@@ -1,5 +1,15 @@
 import RelatedArticles from "@/components/RelatedArticles";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "松井証券は初心者向きか？ | NISA向け証券口座診断",
+  description:
+    "松井証券が初心者向きと言われる理由と、どんな人に向いているかを整理した記事です。始めやすさ、シンプルさ、安心感を重視する人向けの特徴がわかります。",
+  alternates: {
+    canonical: "/articles/matsui-for-beginners",
+  },
+};
 
 export default function MatsuiForBeginnersPage() {
   const merits = [

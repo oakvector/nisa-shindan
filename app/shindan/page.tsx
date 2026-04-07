@@ -1,3 +1,23 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NISA向け証券口座診断 | 診断と比較記事で自分に合う選び方がわかる",
+  description:
+    "NISA向けの証券口座を、3つの診断と比較記事から整理できるサイトです。資産形成スタイル、失敗しにくさ、続けやすさの観点から自分に合う選び方を見つけられます。",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "NISA向け証券口座診断",
+    description:
+      "診断と比較記事から、自分に合う証券口座の選び方を整理できるサイトです。",
+    url: "/",
+    siteName: "NISA向け証券口座診断",
+    locale: "ja_JP",
+    type: "website",
+  },
+};
+
 export default function ShindanIndexPage() {
   const diagnoses = [
     {
@@ -138,7 +158,7 @@ export default function ShindanIndexPage() {
           </div>
         </div>
       </section>
-      
+
     <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20">
     <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
         <p className="mb-2 text-sm font-semibold text-blue-700">比較記事もあります</p>

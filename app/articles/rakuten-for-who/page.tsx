@@ -1,4 +1,14 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "楽天証券はどんな人に向いている？ | NISA向け証券口座診断",
+  description:
+    "楽天証券が向いている人の特徴を整理した記事です。始めやすさ、楽天ポイント活用、なじみやすさを重視する人向けの特徴がわかります。",
+  alternates: {
+    canonical: "/articles/rakuten-for-who",
+  },
+};
 
 export default function RakutenForWhoPage() {
   const strongPoints = [

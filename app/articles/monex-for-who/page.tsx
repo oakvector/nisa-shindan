@@ -1,5 +1,15 @@
 import RelatedArticles from "@/components/RelatedArticles";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "マネックス証券はどんな人に向いている？ | NISA向け証券口座診断",
+  description:
+    "マネックス証券が向いている人の特徴を整理した記事です。商品ラインナップや将来の広がり、自由度を重視する人向けの特徴がわかります。",
+  alternates: {
+    canonical: "/articles/monex-for-who",
+  },
+};
 
 export default function MonexForWhoPage() {
   const strongPoints = [
