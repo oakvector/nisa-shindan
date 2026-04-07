@@ -21,6 +21,7 @@ export default function ShindanIndexPage() {
   href: "/shindan/continue-style",
   status: "公開中",
 },
+  ];
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
