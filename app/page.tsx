@@ -44,6 +44,55 @@ export default function Home() {
           </ul>
         </section>
       </section>
+<section className="mt-8 rounded-2xl border border-gray-200 p-6">
+  <h2 className="mb-4 text-2xl font-semibold">
+    このサイトで比較しているポイント
+  </h2>
+
+  <div className="grid gap-4 sm:grid-cols-2">
+    <div className="rounded-xl bg-gray-50 p-4">
+      <h3 className="mb-2 font-semibold">クレカ積立対応</h3>
+      <p className="text-sm text-gray-600">
+        クレジットカード積立に対応しているかを比較します。
+      </p>
+    </div>
+
+    <div className="rounded-xl bg-gray-50 p-4">
+      <h3 className="mb-2 font-semibold">ポイント還元</h3>
+      <p className="text-sm text-gray-600">
+        積立や利用時のポイント還元の違いを整理します。
+      </p>
+    </div>
+
+    <div className="rounded-xl bg-gray-50 p-4">
+      <h3 className="mb-2 font-semibold">使いやすさ</h3>
+      <p className="text-sm text-gray-600">
+        初心者でも使いやすいか、操作性の観点で確認します。
+      </p>
+    </div>
+
+    <div className="rounded-xl bg-gray-50 p-4">
+      <h3 className="mb-2 font-semibold">米国株対応</h3>
+      <p className="text-sm text-gray-600">
+        米国株や商品ラインナップの広さも比較対象に含めます。
+      </p>
+    </div>
+
+    <div className="rounded-xl bg-gray-50 p-4">
+      <h3 className="mb-2 font-semibold">初心者向けか</h3>
+      <p className="text-sm text-gray-600">
+        これから始める人でも選びやすいサービスかを見ます。
+      </p>
+    </div>
+
+    <div className="rounded-xl bg-gray-50 p-4">
+      <h3 className="mb-2 font-semibold">少額積立のしやすさ</h3>
+      <p className="text-sm text-gray-600">
+        少額から始めやすいかどうかも重視しています。
+      </p>
+    </div>
+  </div>
+</section>
 
       <footer className="border-t border-gray-200">
         <div className="mx-auto max-w-4xl px-6 py-8">
