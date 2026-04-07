@@ -7,13 +7,13 @@ export default function ShindanIndexPage() {
       href: "/shindan/style",
       status: "公開中",
     },
-    {
-      title: "NISAで失敗しにくい口座タイプ診断",
-      description:
-        "失敗しにくさや始めやすさの観点から、自分に合う口座タイプを探す診断です。",
-      href: "#",
-      status: "準備中",
-    },
+{
+  title: "NISAで失敗しにくい口座タイプ診断",
+  description:
+    "失敗しにくさや始めやすさの観点から、自分に合う口座タイプを探す診断です。",
+  href: "/shindan/failure-safe",
+  status: "公開中",
+},
     {
       title: "あなたに合う続けやすい投資スタイル診断",
       description:
