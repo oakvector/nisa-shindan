@@ -14,14 +14,13 @@ export default function ShindanIndexPage() {
   href: "/shindan/failure-safe",
   status: "公開中",
 },
-    {
-      title: "あなたに合う続けやすい投資スタイル診断",
-      description:
-        "無理なく続けやすい積立スタイルから、相性の良い候補を整理する診断です。",
-      href: "#",
-      status: "準備中",
-    },
-  ];
+{
+  title: "あなたに合う続けやすい投資スタイル診断",
+  description:
+    "無理なく続けやすい積立スタイルから、相性の良い候補を整理する診断です。",
+  href: "/shindan/continue-style",
+  status: "公開中",
+},
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
