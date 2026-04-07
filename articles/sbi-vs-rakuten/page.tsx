@@ -7,8 +7,8 @@ export default function SbiVsRakutenPage() {
     },
     {
       point: "ポイント活用",
-      sbi: "複数のポイント経済圏を比較しやすい",
-      rakuten: "楽天ポイントとの相性を感じやすい",
+      sbi: "幅広く比較しながら選びたい人向け",
+      rakuten: "楽天ポイントを活かしたい人向け",
     },
     {
       point: "クレカ積立",
@@ -53,6 +53,9 @@ export default function SbiVsRakutenPage() {
             <a href="/shindan" className="transition hover:text-slate-900">
               診断一覧
             </a>
+            <a href="/articles" className="transition hover:text-slate-900">
+              記事一覧
+            </a>
             <a href="/how-it-works" className="transition hover:text-slate-900">
               使い方
             </a>
@@ -75,7 +78,7 @@ export default function SbiVsRakutenPage() {
 
           <p className="mb-6 text-base leading-8 text-slate-600 sm:text-lg">
             NISAを始めるときに、SBI証券と楽天証券で迷う人はとても多いです。
-            どちらが良いかは一概には決められず、
+            どちらが良いかは一言では決められず、
             「何を重視するか」で向いている候補が変わります。
             この記事では、違いをシンプルに整理します。
           </p>
@@ -249,6 +252,38 @@ export default function SbiVsRakutenPage() {
           </p>
         </section>
       </article>
+
+      <footer className="border-t border-slate-200 bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+          <div className="mb-4">
+            <p className="text-sm font-semibold text-slate-900">
+              NISA向け証券口座診断
+            </p>
+            <p className="mt-1 text-sm text-slate-500">
+              比較と診断で、証券口座選びをわかりやすく。
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-4 text-sm text-slate-600">
+            <a href="/about" className="hover:text-slate-900 hover:underline">
+              About
+            </a>
+            <a href="/privacy" className="hover:text-slate-900 hover:underline">
+              Privacy
+            </a>
+            <a href="/disclosure" className="hover:text-slate-900 hover:underline">
+              Disclosure
+            </a>
+            <a href="/how-it-works" className="hover:text-slate-900 hover:underline">
+              How it works
+            </a>
+          </div>
+
+          <p className="mt-6 text-xs text-slate-400">
+            © 2026 NISA向け証券口座診断
+          </p>
+        </div>
+      </footer>
     </main>
   );
 }

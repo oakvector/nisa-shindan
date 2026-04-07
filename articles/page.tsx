@@ -3,7 +3,7 @@ export default function ArticlesPage() {
     {
       title: "SBI証券と楽天証券の違いは？",
       description:
-        "NISAを始めるときに迷いやすい2社の違いを、シンプルに整理した比較記事です。",
+        "NISAを始めるときに迷いやすい2社の違いを、初心者にもわかりやすく整理した比較記事です。",
       href: "/articles/sbi-vs-rakuten",
       tag: "比較記事",
     },
@@ -26,6 +26,9 @@ export default function ArticlesPage() {
             <a href="/articles" className="transition hover:text-slate-900">
               記事一覧
             </a>
+            <a href="/how-it-works" className="transition hover:text-slate-900">
+              使い方
+            </a>
             <a href="/about" className="transition hover:text-slate-900">
               About
             </a>
@@ -46,8 +49,9 @@ export default function ArticlesPage() {
           </h1>
 
           <p className="text-base leading-8 text-slate-600 sm:text-lg">
-            診断だけでなく、証券口座の違いや選び方を整理した記事も公開していきます。
-            比較記事を読んでから診断に進むと、より判断しやすくなります。
+            診断だけでなく、証券口座の違いや選び方を整理した記事も読めます。
+            まず記事で比較のポイントをざっくり理解してから診断に進むと、
+            より判断しやすくなります。
           </p>
         </div>
 
@@ -80,6 +84,38 @@ export default function ArticlesPage() {
           ))}
         </div>
       </section>
+
+      <footer className="border-t border-slate-200 bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+          <div className="mb-4">
+            <p className="text-sm font-semibold text-slate-900">
+              NISA向け証券口座診断
+            </p>
+            <p className="mt-1 text-sm text-slate-500">
+              比較と診断で、証券口座選びをわかりやすく。
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-4 text-sm text-slate-600">
+            <a href="/about" className="hover:text-slate-900 hover:underline">
+              About
+            </a>
+            <a href="/privacy" className="hover:text-slate-900 hover:underline">
+              Privacy
+            </a>
+            <a href="/disclosure" className="hover:text-slate-900 hover:underline">
+              Disclosure
+            </a>
+            <a href="/how-it-works" className="hover:text-slate-900 hover:underline">
+              How it works
+            </a>
+          </div>
+
+          <p className="mt-6 text-xs text-slate-400">
+            © 2026 NISA向け証券口座診断
+          </p>
+        </div>
+      </footer>
     </main>
   );
 }
