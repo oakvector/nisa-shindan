@@ -1,5 +1,5 @@
 export default function ArticlesPage() {
-  const articles = [
+  const featured = [
     {
       title: "SBI証券と楽天証券の違いは？",
       description:
@@ -23,7 +23,39 @@ export default function ArticlesPage() {
     },
   ];
 
-  
+  const brokerArticles = [
+    {
+      title: "SBI証券はどんな人に向いている？",
+      description:
+        "SBI証券が向いている人の特徴や、他社も比較した方がよいケースを整理した記事です。",
+      href: "/articles/sbi-for-who",
+    },
+    {
+      title: "楽天証券はどんな人に向いている？",
+      description:
+        "楽天証券が向いている人の特徴や、他社も比較した方がよいケースを整理した記事です。",
+      href: "/articles/rakuten-for-who",
+    },
+    {
+      title: "松井証券は初心者向きか？",
+      description:
+        "松井証券が初心者向きと言われる理由と、他社も比較した方がよい人を整理した記事です。",
+      href: "/articles/matsui-for-beginners",
+    },
+    {
+      title: "マネックス証券はどんな人に向いている？",
+      description:
+        "マネックス証券と相性が良い人の特徴や、他社も比較した方がよいケースを整理した記事です。",
+      href: "/articles/monex-for-who",
+    },
+    {
+      title: "三菱UFJ eスマート証券はどんな人に向いている？",
+      description:
+        "三菱UFJ eスマート証券が向いている人の特徴や、他社も比較した方がよいケースを整理した記事です。",
+      href: "/articles/musmart-for-who",
+    },
+  ];
+
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 backdrop-blur">
@@ -51,53 +83,131 @@ export default function ArticlesPage() {
         </div>
       </header>
 
-      <section className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8 md:p-10">
           <p className="mb-3 text-sm font-semibold tracking-wide text-blue-700">
             記事一覧
           </p>
 
           <h1 className="mb-5 text-4xl font-bold leading-[1.15] tracking-tight text-slate-950 sm:text-5xl">
-            比較記事から
+            比較記事と解説記事から
             <br />
             <span className="whitespace-nowrap">違いを整理する</span>
           </h1>
 
-          <p className="text-base leading-8 text-slate-600 sm:text-lg">
+          <p className="max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
             診断だけでなく、証券口座の違いや選び方を整理した記事も読めます。
-            まず記事で比較のポイントをざっくり理解してから診断に進むと、
-            より判断しやすくなります。
+            まず記事で全体像をつかみ、そのあと診断で自分向けの候補を絞る流れがおすすめです。
           </p>
+
+          <div className="mt-6 flex flex-wrap gap-2.5">
+            {["比較記事", "選び方ガイド", "各社の解説記事", "診断導線あり"].map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-700"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-8 grid gap-6">
-          {articles.map((item) => (
-            <div
-              key={item.title}
-              className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8"
-            >
-              <div className="mb-3">
-                <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-                  {item.tag}
-                </span>
-              </div>
+        <section className="mt-8">
+          <div className="mb-5 flex flex-col gap-2">
+            <p className="text-sm font-semibold text-blue-700">まず読みたい記事</p>
+            <h2 className="text-2xl font-bold text-slate-950">
+              比較・選び方の入口
+            </h2>
+          </div>
 
-              <h2 className="mb-3 text-2xl font-bold text-slate-950">
-                {item.title}
-              </h2>
-              <p className="mb-5 text-sm leading-7 text-slate-600 sm:text-base">
-                {item.description}
-              </p>
-
-              <a
-                href={item.href}
-                className="inline-flex rounded-xl bg-slate-950 px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
+          <div className="grid gap-6 lg:grid-cols-3">
+            {featured.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8"
               >
-                記事を読む
+                <div className="mb-3">
+                  <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                    {item.tag}
+                  </span>
+                </div>
+
+                <h3 className="mb-3 text-xl font-bold text-slate-950">
+                  {item.title}
+                </h3>
+                <p className="mb-5 text-sm leading-7 text-slate-600">
+                  {item.description}
+                </p>
+
+                <a
+                  href={item.href}
+                  className="inline-flex rounded-xl bg-slate-950 px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
+                >
+                  記事を読む
+                </a>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-10">
+          <div className="mb-5 flex flex-col gap-2">
+            <p className="text-sm font-semibold text-blue-700">各社を知る</p>
+            <h2 className="text-2xl font-bold text-slate-950">
+              証券会社ごとの解説記事
+            </h2>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-2">
+            {brokerArticles.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+              >
+                <h3 className="mb-2 text-lg font-semibold text-slate-950">
+                  {item.title}
+                </h3>
+                <p className="mb-4 text-sm leading-6 text-slate-600">
+                  {item.description}
+                </p>
+                <a
+                  href={item.href}
+                  className="inline-flex rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+                >
+                  記事を読む
+                </a>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-10">
+          <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
+            <p className="mb-2 text-sm font-semibold text-blue-700">次の一歩</p>
+            <h2 className="mb-4 text-2xl font-bold text-slate-950">
+              読んだあとに診断で整理する
+            </h2>
+            <p className="mb-6 text-sm leading-7 text-slate-600 sm:text-base">
+              記事で違いを理解しても、最終的にどれが自分に合うかは重視するポイントで変わります。
+              迷う場合は、診断で自分のタイプを整理すると判断しやすくなります。
+            </p>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <a
+                href="/shindan"
+                className="rounded-xl bg-slate-950 px-6 py-3 text-center font-medium text-white transition hover:opacity-90"
+              >
+                診断一覧を見る
+              </a>
+              <a
+                href="/shindan/style"
+                className="rounded-xl border border-slate-300 bg-white px-6 py-3 text-center font-medium text-slate-700 transition hover:bg-slate-100"
+              >
+                基本診断をやってみる
               </a>
             </div>
-          ))}
-        </div>
+          </div>
+        </section>
       </section>
 
       <footer className="border-t border-slate-200 bg-white">
