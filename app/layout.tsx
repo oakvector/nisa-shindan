@@ -15,9 +15,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "NISA向け証券口座診断",
   description: "比較と診断で、証券口座選びをわかりやすく。",
-  verification: {
-    google: "KDosag5_r9C4CyDMEFaelmTUpoeBqP41",
-  },
 };
 
 export default function RootLayout({
@@ -27,9 +24,15 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="ja"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <meta
+          name="google-site-verification"
+          content="KDosag5_r9C4CyDMEFaelmTUpoeBqP41"
+        />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
