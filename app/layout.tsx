@@ -30,7 +30,7 @@ export default function RootLayout({
       <head>
         <meta
           name="google-site-verification"
-          content="KDosag5_r9C4CyDMEFaelmTUpoeBqP41"
+          content="KDosag5_r9C4CyDMEFaelmTUpoeBqP41Lf_PfxbFncM"
         />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
